@@ -1,0 +1,14 @@
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.AssemblyInfoInputs.cache
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.AssemblyInfo.cs
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.csproj.CoreCompileInputs.cache
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\DnDAdventureGame.exe
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\DnDAdventureGame.deps.json
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\DnDAdventureGame.runtimeconfig.json
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\DnDAdventureGame.dll
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\DnDAdventureGame.pdb
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.dll
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\refint\DnDAdventureGame.dll
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.pdb
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.genruntimeconfig.cache
+C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\ref\DnDAdventureGame.dll

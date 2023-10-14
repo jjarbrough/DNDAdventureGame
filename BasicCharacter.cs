@@ -17,7 +17,7 @@ namespace DnDAdventureGame
         public int chaScore { get; set; } //bonus to prices in town
         public int intScore { get; set; } //bonus to finding goodies on baddies
         public int conScore { get; set; } //bonus to damage reduction and bonus to health
-        public int wisScore { get; set; }
+        public int wisScore { get; set; } //bonus to percieving things around you i:e hidden loot or surprises
         public bool isAlive { get; set; }
         public string weapon { get; set; }
         public int weaponDie { get; set; }

@@ -48,12 +48,16 @@ namespace DnDAdventureGame
 
         public override void Damage(int damage)
         {
-            health -= (damage - (armorScore / 4));
+            health -= (damage - (armorScore / 4) - conScore);
+            if (health <= 0)
+            {
+                isAlive = false;
+            }
         }
 
         public override void Heal(int health)
         {
-            throw new NotImplementedException();
+            this.health += health;
         }
     }
 }

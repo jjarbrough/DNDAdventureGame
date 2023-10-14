@@ -47,12 +47,12 @@ namespace DnDAdventureGame
 
         public override void Damage(int damage)
         {
-            health -= (damage - (armorScore / 4));
+            health -= (damage - (armorScore / 4) - conScore);
         }
 
         public override void Heal(int health)
         {
-            throw new NotImplementedException();
+            this.health += health;
         }
     }
 }

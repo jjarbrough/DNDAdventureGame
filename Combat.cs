@@ -18,27 +18,31 @@ namespace DnDAdventureGame
         public void EnemyAttackFirst()
         {
             int sum = 0;
-            while (pC.checkAlive() && badGuy.checkAlive())
+            while (pC.isAlive && badGuy.isAlive)
             {
                 int num = badGuy.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 pC.Damage(num);
                 sum += num;
-                if(!pC.checkAlive())
+                if(!pC.isAlive)
                 {
                     Console.WriteLine("You are dead!");
+                    break;
                 }
                 int num2 = pC.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 badGuy.Damage(num2);
-                if(!badGuy.checkAlive())
+                if(!badGuy.isAlive)
                 {
                     Console.WriteLine($"You killed the {badGuy.name}!");
                     pC.gold += badGuy.gold;
                     Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
                 }
             }
-            Console.WriteLine($"you won the fight but took {sum} damage");
+            if (pC.isAlive)
+            {
+                Console.WriteLine($"you won the fight but took {sum} damage");
+            }
         }
 
         public void YouAttackFirst()
@@ -47,9 +51,9 @@ namespace DnDAdventureGame
             while (pC.checkAlive() && badGuy.checkAlive())
             {
                 int num2 = pC.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 badGuy.Damage(num2);
-                if (!badGuy.checkAlive())
+                if (!badGuy.isAlive)
                 {
                     Console.WriteLine($"You killed the {badGuy.name}!");
                     pC.gold += badGuy.gold;
@@ -57,21 +61,25 @@ namespace DnDAdventureGame
                     break;
                 }
                 int num = badGuy.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 pC.Damage(num);
                 sum += num;
-                if (!pC.checkAlive())
+                if (!pC.isAlive)
                 {
                     Console.WriteLine("You are dead!");
+                    break;
                 }
             }
-            Console.WriteLine($"you won the fight but took {sum} damage");
+            if (pC.isAlive)
+            {
+                Console.WriteLine($"you won the fight but took {sum} damage");
+            }
         }
         public void YouhaveRangedWeapon()
         {
             Console.WriteLine("You have a ranged weapon so get a free attack");
             int num2 = pC.Attack();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             badGuy.Damage(num2);
             if (!badGuy.checkAlive())
             {
@@ -81,7 +89,7 @@ namespace DnDAdventureGame
             while (pC.checkAlive() && badGuy.checkAlive())
             {
                 int num3 = pC.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 badGuy.Damage(num3);
                 if (!badGuy.checkAlive())
                 {
@@ -91,15 +99,19 @@ namespace DnDAdventureGame
                     break;
                 }
                 int num = badGuy.Attack();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 pC.Damage(num);
                 sum += num;
                 if (!pC.checkAlive())
                 {
                     Console.WriteLine("You are dead!");
+                    break;
                 }
             }
-            Console.WriteLine($"you won the fight but took {sum} damage");
+            if (pC.isAlive)
+            {
+                Console.WriteLine($"you won the fight but took {sum} damage");
+            }
         }
     }
 }

@@ -9,18 +9,23 @@ namespace DnDAdventureGame
 {
     internal abstract class Enemy
     {
+        public int conScore { get; set; }
         public int armorScore {  get; set; }
         public int gold { get; set; }
         public string weaponType { get; set; }
         public string name { get; set; }
         public int health { get; set; }
         public int damageDie { get; set; }
-        public bool isDead { get; set; }
+        public bool isAlive { get; set; }
 
 
         public void Damage(int damage)
         {
-            health -= (damage - (armorScore / 4));
+            health -= (damage - (armorScore / 4) - conScore);
+            if (health <= 0)
+            {
+                isAlive = false;
+            }
         }
         public bool checkAlive ()
         {
@@ -30,6 +35,7 @@ namespace DnDAdventureGame
             }
             else
             {
+                isAlive = false;
                 return false;
             }
         }

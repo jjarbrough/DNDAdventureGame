@@ -16,7 +16,7 @@ namespace DnDAdventureGame
             name = "Goblin"; 
             health = 20;
             damageDie = 4;
-            isDead = false;
+            isAlive = true;
             weaponType = "knife";
         }
         public bool checkAlive()
@@ -27,7 +27,7 @@ namespace DnDAdventureGame
             }
             else
             {
-                isDead = true;
+                isAlive = false;
                 return false;
             }
         }

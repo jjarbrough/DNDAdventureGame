@@ -20,17 +20,5 @@ namespace DnDAdventureGame
             isAlive = true;
             weaponType = "knife";
         }
-        public bool checkAlive()
-        {
-            if (health > 0)
-            {
-                return true;
-            }
-            else
-            {
-                isAlive = false;
-                return false;
-            }
-        }
     }
 }

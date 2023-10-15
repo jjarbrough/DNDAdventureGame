@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Bear : Enemy
+    internal class Kobold : Enemy
     {
-        public Bear()
+        public Kobold()
         {
-            conScore = 3;
+            conScore = 1;
             Random rnd = new Random();
-            gold = rnd.Next(10, 30);
+            gold = rnd.Next(1, 10);
             armorScore = 4;
             weaponType = "claws";
-            name = "bear";
-            health = 25;
-            damageDie = 8;
+            name = "kobold";
+            health = 5;
+            damageDie = 4;
             isAlive = true;
         }
     }

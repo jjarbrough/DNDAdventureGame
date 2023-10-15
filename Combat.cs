@@ -97,6 +97,8 @@ namespace DnDAdventureGame
             if (!badGuys[0].isAlive)
             {
                 Console.WriteLine($"You killed the {badGuys[0].name}!");
+                pC.gold += badGuys[0].gold;
+                Console.WriteLine($"You collect {badGuys[0].gold} gold off of the {badGuys[0].name}'s corpse");
             }
             int sum = 0;
             foreach (Enemy badGuy in badGuys)

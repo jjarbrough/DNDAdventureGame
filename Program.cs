@@ -92,46 +92,44 @@ namespace DnDAdventureGame
             int num = rnd.Next(1, (number + 1));
             return num;
         }
-        
-        
+
+        //testing random enemy populator
+        public static List<Enemy> EnemyPopulator()
+        {
+            List<Enemy> enemyList = new List<Enemy>();
+            int count = (Program.DieRoller(5) - 1);
+            for (int i = 0; i < count; i++)
+            {
+                int baddy = Program.DieRoller(4);
+                if (baddy == 1)
+                {
+                    Goblin goblin = new Goblin();
+                    enemyList.Add(goblin);
+                }
+                else if (baddy == 2)
+                {
+                    Bear bear = new Bear();
+                    enemyList.Add(bear);
+                }
+                else if (baddy == 3)
+                {
+                    Kobold kobold = new Kobold();
+                    enemyList.Add(kobold);
+                }
+            }
+            return enemyList;
+        }
+
         //populating the lists
         public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
-            Goblin gobbo = new Goblin();
-            Goblin gobbo1 = new Goblin();
-            Goblin gobbo2 = new Goblin();
-            Goblin gobbo3 = new Goblin();
-            Goblin gobbo4 = new Goblin();
-            Goblin gobbo5 = new Goblin();
-            Goblin gobbo6 = new Goblin();
-            Goblin gobbo7 = new Goblin();
-            Goblin gobbo8 = new Goblin();
-            Goblin gobbo9 = new Goblin();
-            Bear bur = new Bear();
-            Bear bur1 = new Bear();
-            Bear bur2 = new Bear();
-            List<Enemy> enemies = new List<Enemy>();
-            enemies.Add(gobbo);
-            enemies.Add(bur);
-            enemies.Add(bur1);
-            enemies.Add(gobbo1);
-            List<Enemy> enemies2 = new List<Enemy>();
-            enemies2.Add(gobbo2);
-            enemies2.Add(gobbo3);
-            enemies2.Add(gobbo4);
-            enemies2.Add(gobbo5);
-            enemies2.Add(gobbo6);
-            enemies2.Add(gobbo7);
-            List<Enemy> enemies3 = new List<Enemy>();
-            enemies3.Add(bur2);
-            enemies3.Add(gobbo8);
-            enemies3.Add(gobbo9);
-            List<Enemy> enemies4 = new List<Enemy>();
             List<List<Enemy>> masterMonsterList = new List<List<Enemy>>();
-            masterMonsterList.Add(enemies);
-            masterMonsterList.Add(enemies2);
-            masterMonsterList.Add(enemies3);
-            masterMonsterList.Add(enemies4);
+            for (int i = 0; i < 1000;i ++)
+            {
+                List<Enemy> holder = Program.EnemyPopulator();
+                masterMonsterList.Add(holder);
+
+            }
             List<Encounter> temp = new List<Encounter>();
             Encounter cave = new Encounter()
             {
@@ -155,7 +153,7 @@ namespace DnDAdventureGame
             };
             Encounter field = new Encounter()
             {
-                difficultyToRun = 12,
+                difficultyToRun = 5,
                 pC = mainCharacter,
                 isNoticed = true,
                 isTown = false,
@@ -165,12 +163,12 @@ namespace DnDAdventureGame
             };
             Encounter forest = new Encounter()
             {
-                difficultyToRun = 12,
+                difficultyToRun = 10,
                 pC = mainCharacter,
                 isNoticed = true,
                 isTown = false,
                 locationDescription = "Walking into a forest, you step into a dense and verdant environment. \nThe ground is covered with fallen leaves, twigs, and soft soil. \nTall trees rise around you, their branches forming a natural canopy overhead, dimming the light. \nThe air is cool, and the scent of earth and moss surrounds you. \nThe forest is alive with the chirping of birds, rustling of small animals, and the occasional crackling of branches. \nIt's a serene and mysterious realm, inviting you to explore its depths.",
-                fromAfar = "A field with rolling hills",
+                fromAfar = "A Dense and gloomy forest",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter town = new Encounter()
@@ -183,11 +181,22 @@ namespace DnDAdventureGame
                 fromAfar = "A town peeking over the hills in the distance",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
+            Encounter bog = new Encounter()
+            {
+                difficultyToRun = 15,
+                pC = mainCharacter,
+                isNoticed = false,
+                isTown = false,
+                locationDescription = "As you step into the bog, the ground beneath your feet gives way, sinking into a squelchy, muddy morass. \nThe air is thick with a damp, earthy aroma, and the dense fog conceals much of the landscape. \nWaterlogged plants with twisted, moss-covered branches reach out from the murky waters, and the eerie chorus of croaking frogs and buzzing insects fills the air. \nYour every step is accompanied by a sucking sound as your boots struggle to break free from the mire, \nfmaking each movement a slow and cautious endeavor in this eerie, desolate wetland.",
+                fromAfar = "What appears to be wetlands covered in fog",
+                enemies = GetRandomEnemies(masterMonsterList)
+            };
             temp.Add(cave);
             temp.Add(meadow);
             temp.Add(field);
             temp.Add(forest);
             temp.Add(town);
+            temp.Add(bog);
             return temp;
         }
 
@@ -233,7 +242,7 @@ namespace DnDAdventureGame
                     case "e":
                         mainCharacter = new Elf();
                         break;
-                    default: 
+                    default:
                         Console.WriteLine("not an option so you are a human!");
                         mainCharacter = new Human();
                         break;
@@ -308,7 +317,6 @@ namespace DnDAdventureGame
             currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
             while (true)
             {
-                Console.WriteLine("======================  in outerloop ++++++++++++++++++++++++");
                 while (!currentEncounter.isTown)
                 {
                     currentEncounter.doWhat();
@@ -319,7 +327,6 @@ namespace DnDAdventureGame
                 while (!adventuring)
                 {
                     adventuring = currentEncounter.doTown(mainCharacter);
-                    Console.WriteLine("======================  value of adventuring ++++++++++++++++++++++++" + adventuring);
                 }
                 currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
             }

@@ -11,6 +11,7 @@ namespace DnDAdventureGame
         public static BasicCharacter character {  get; set; }
         public static List<Items> shopInventory = new List<Items>();
 
+        //selection statement for if they choose a stat boost
         public void atrributeIncrease(BasicCharacter character)
         {
             Console.WriteLine("Which stat would you like to boost?\n s for strength, i for intelligence, d for dexterity, c for constitution, w for wisdom, h for charisma");
@@ -57,6 +58,7 @@ namespace DnDAdventureGame
             }
         }
 
+        //shop options
         public Shop(BasicCharacter pC)
         {
             character = pC;
@@ -64,10 +66,11 @@ namespace DnDAdventureGame
             Items statBoost = new StatBoost();
             shopInventory.Add(healthPotion);
             shopInventory.Add(statBoost);
+            Console.WriteLine("As you push open the creaking wooden door, a gust of cool, musty air greets you. \nThe dimly lit interior of the shop is filled with an array of curious and rustic items. \nWooden shelves groan under the weight of handcrafted leather goods, pottery, and pewter mugs. \nThe flickering glow of oil lamps casts dancing shadows on the rough-hewn stone walls. \nThe shopkeeper stands behind a weathered oak counter, ready to assist you with a warm, welcoming smile. \nThe faint scent of herbs and spices wafts from a corner, where dried herbs hang from the ceiling");
             Console.WriteLine($"The shopkeeper has the following items for sale:");
             for (int i = 0; i < shopInventory.Count(); i++)
             {
-                Console.WriteLine($"{shopInventory[i].name} for {shopInventory[i].goldAmount}");
+                Console.WriteLine($"{shopInventory[i].name} for ({shopInventory[i].goldAmount - (character.chaScore * 3)})");
             }
             bool finished = false;
             while (!finished)
@@ -78,11 +81,11 @@ namespace DnDAdventureGame
                     {
                         case "h":
                             character.Inventory.Add(healthPotion);
-                            character.gold -= healthPotion.goldAmount;
+                            character.gold -= (healthPotion.goldAmount - (character.chaScore * 3));
                             break;
                         case "a":
                             atrributeIncrease(pC);
-                            character.gold -= statBoost.goldAmount;
+                            character.gold -= (statBoost.goldAmount - (character.chaScore * 3));
                             Console.WriteLine("You feel more powerful");
                             break;
                         case "e":

@@ -30,6 +30,7 @@
             this.pC = pC;
         }
 
+        //the loop of options while in town
         public bool doTown(BasicCharacter character)
         {
             Console.WriteLine("What do you want to do?");
@@ -49,7 +50,6 @@
                     return false;
                 case "a":
                     Console.WriteLine("Eager to get back to adventuring you head out of town");
-                    Console.WriteLine("======================  in case a, returning true ++++++++++++++++++++++++");
                     return true;
                 case "s":
                     Shop store = new Shop(character);
@@ -61,15 +61,44 @@
 
         }
 
+        //loop of options while adventuring
         public void doWhat()
         {
             bool correctInput = false;
             while (!correctInput)
             {
                 Console.WriteLine($"{locationDescription}");
-                Console.WriteLine($"you see {enemies.Count} enemies");
+                Thread.Sleep(10000);
+                Console.WriteLine($"you see:");
+                if(enemies.Count == 0)
+                {
+                    Console.WriteLine("no enemies in your current vicinity");
+                    Thread.Sleep(3000);
+                }
+                foreach (Enemy enemy in enemies)
+                {
+                    Console.WriteLine($"{enemy.name}");
+                    Thread.Sleep(1000);
+                }
+                if (!isNoticed)
+                {
+                    Console.WriteLine("You havent been spotted.... yet.");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("A sudden Noise gives you away, drawing the attention of anyone in the vicinity");
+                    Thread.Sleep(1000);
+                }
                 Console.WriteLine("What do you want to do?");
-                Console.WriteLine("f for fight, r for run or u for use item");
+                if (enemies.Count() > 0)
+                {
+                    Console.WriteLine("f for fight, r for run or u for use item");
+                }
+                else
+                {
+                    Console.WriteLine("f for forage, r for run or u for use item");
+                }
                 string input = Console.ReadLine();
                 if (input.Equals("f"))
                 {
@@ -99,11 +128,7 @@
             }
         }
 
-        public void OutDescription()
-        {
-            Console.WriteLine($"{locationDescription}");
-        }
-
+        //checking to see if you got away
         public bool TryRun()
         {
             if (pC.dexScore + Program.DieRoller(20) >= difficultyToRun)
@@ -115,6 +140,7 @@
                 return false;
             }
         }
+        //if you stay and fight
         public void Stay() 
         {
             if (enemies.Count > 0)
@@ -146,6 +172,8 @@
                 SurvivedEncounter();
             }
         }
+
+        //if you use an item
         public void UseItem()
         {
             pC.CheckInventory();
@@ -168,6 +196,7 @@
                 }
             }
         }
+        //when you survive an encounter
         public void SurvivedEncounter()
         {
             Console.WriteLine("You take a deep breath and look around you, relishing the sweet taste of victory");
@@ -175,9 +204,10 @@
             if (loot.Count() == 0)
             {
                 Console.WriteLine("Searching...");
-                int num = Program.DieRoller(10001);
+                int num = Program.DieRoller(10000);
                 Thread.Sleep(num);
                 Console.WriteLine("Nothing...........absolutely nothing.");
+                Thread.Sleep(5000);
             }
             else
             {
@@ -191,6 +221,7 @@
             }
         }
 
+        //finding which direction you want to go
         public static Encounter ChooseDirection(List<Encounter> directions)
         {
             bool correctFeedback = false;

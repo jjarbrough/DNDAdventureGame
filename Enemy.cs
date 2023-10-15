@@ -18,7 +18,7 @@ namespace DnDAdventureGame
         public int damageDie { get; set; }
         public bool isAlive { get; set; }
 
-
+        //taking damage and cheking if still alive
         public void Damage(int damage)
         {
             int totalDamage = damage - conScore;
@@ -37,6 +37,7 @@ namespace DnDAdventureGame
             }
         }
 
+        //doing damage
         public int Attack()
         {
             Random rnd = new Random();

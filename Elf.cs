@@ -37,7 +37,7 @@ namespace DnDAdventureGame
             return damage;
         }
 
-        //take damage
+        //take damage and check if still alive
         public override void Damage(int damage)
         {
             int totalDamage = damage - conScore;

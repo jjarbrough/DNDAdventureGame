@@ -15,6 +15,7 @@ namespace DnDAdventureGame
             isAlive = true;
             name = "Geoffrey";
             health = 60;
+            maxHealth = 60;
             chaScore = 3;
             conScore = 1;
             dexScore = 0;

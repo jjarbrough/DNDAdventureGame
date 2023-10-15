@@ -8,6 +8,8 @@ namespace DnDAdventureGame
 {
     internal abstract class BasicCharacter
     {
+        public int maxHealth {  get; set; }
+
         public List<Items> Inventory = new List<Items>();
         public int armorScore { get; set; }
         public int gold { get; set; }
@@ -38,12 +40,12 @@ namespace DnDAdventureGame
         }
         public virtual void CheckAttributes()
         {
-            Console.WriteLine($"Your strength score is: {strScore}");
-            Console.WriteLine($"Your intelligence score is: {intScore}");
-            Console.WriteLine($"Your dexterity score is: {dexScore}");
-            Console.WriteLine($"Your charisma score is: {chaScore}");
-            Console.WriteLine($"Your wisdom score is: {wisScore}");
-            Console.WriteLine($"Your constitution score is: {conScore}");
+            Console.WriteLine($"Your strength score is: {strScore}. This increases your damage if you are a dwarf or human");
+            Console.WriteLine($"Your intelligence score is: {intScore}. This increases the amount of valuable artefacts you can find on enemies");
+            Console.WriteLine($"Your dexterity score is: {dexScore}. This increases the Elves damage as well as increasing your chances to get away");
+            Console.WriteLine($"Your charisma score is: {chaScore}. This decreases the amount of gold upgrades cost in town");
+            Console.WriteLine($"Your wisdom score is: {wisScore}. This increases your chances of finding treasures in the environment");
+            Console.WriteLine($"Your constitution score is: {conScore}. This increases your health and damage resistance");
         }
     }
 }

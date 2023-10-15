@@ -15,7 +15,7 @@ namespace DnDAdventureGame
             Random rnd = new Random();
             gold = rnd.Next(1,16);
             name = "Goblin"; 
-            health = 7;
+            health = 10;
             damageDie = 4;
             isAlive = true;
             weaponType = "knife";

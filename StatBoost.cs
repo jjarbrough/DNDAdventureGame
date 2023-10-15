@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class HealthPotion : Items
+    internal class StatBoost : Items
     {
-        public override string name { get ; set; }
+        public override string name { get; set ; }
         public override int healthAmount { get; set; }
         public override int goldAmount { get; set; }
 
-        public HealthPotion() 
+        public StatBoost()
         {
-            name = "Normal Health potion";
-            healthAmount = 25;
-            goldAmount = 25;
+            name = "+1 to an attribute of your choice";
+            healthAmount = 0;
+            goldAmount = 100;
         }
     }
+
 }

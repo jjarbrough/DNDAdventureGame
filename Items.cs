@@ -10,5 +10,6 @@ namespace DnDAdventureGame
     {
         public abstract string name { get; set; }
         public abstract int healthAmount { get; set; }
+        public abstract int goldAmount { get; set; }
     }
 }

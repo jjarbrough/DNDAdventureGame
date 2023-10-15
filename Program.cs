@@ -5,6 +5,40 @@ namespace DnDAdventureGame
 {
     internal class Program
     {
+        public static void EndGameScreen(BasicCharacter character)
+        {
+            Console.WriteLine(@" __     ______  _    _    _____ _    _ _______      _________      ________ _____  _ _ ");
+            Thread.Sleep(500);
+            Console.WriteLine(@" \ \   / / __ \| |  | |  / ____| |  | |  __ \ \    / /_   _\ \    / /  ____|  __ \| | |");
+            Thread.Sleep(500);
+            Console.WriteLine(@"  \ \_/ / |  | | |  | | | (___ | |  | | |__) \ \  / /  | |  \ \  / /| |__  | |  | | | |");
+            Thread.Sleep(500);
+            Console.WriteLine(@"   \   /| |  | | |  | |  \___ \| |  | |  _  / \ \/ /   | |   \ \/ / |  __| | |  | | | |");
+            Thread.Sleep(500);
+            Console.WriteLine(@"    | | | |__| | |__| |  ____) | |__| | | \ \  \  /   _| |_   \  /  | |____| |__| |_|_|");
+            Thread.Sleep(500);
+            Console.WriteLine(@"    |_|  \____/ \____/  |_____/ \____/|_|  \_\  \/   |_____|   \/   |______|_____/(_|_)");
+            Thread.Sleep(500);
+            int option = character.gold;
+            if (option < 0)
+            {
+                Console.WriteLine("You retire destitute owing money all over town. You die alone and friendless.");
+            }
+            else if (option >= 0 && option <100)
+            {
+                Console.WriteLine("You retire as a peasant. It's an honest living");
+            }
+            else if (option >= 100 && option < 150)
+            {
+                Console.WriteLine("You use your money adventuring to buy inventory, become a merchant and retire comfortably");
+            }
+            else
+            {
+                Console.WriteLine("You made your fortune adventuring, you have bought your way into nobility retiring as a pampered lord");
+            }
+            Thread.Sleep (15000);
+            System.Environment.Exit(1);
+        }
         public static List<Encounter> GetRandomEncounters(List<Encounter> mainListOfEncounters)
         {
             List<Encounter> temp = new List<Encounter>();
@@ -47,7 +81,7 @@ namespace DnDAdventureGame
             return num;
         }
 
-        public static List<Encounter> makeFourEnvironmentsAndPopulate(BasicCharacter mainCharacter)
+        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
             Goblin gobbo = new Goblin();
             Goblin gobbo1 = new Goblin();
@@ -125,10 +159,21 @@ namespace DnDAdventureGame
                 fromAfar = "A field with rolling hills",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
+            Encounter town = new Encounter()
+            {
+                difficultyToRun = 12,
+                pC = mainCharacter,
+                isNoticed = true,
+                isTown = true,
+                locationDescription = "Walking into town narrow cobblestone streets wind between centuries-old stone buildings. \nOverhanging timber-framed houses line the lanes, and the air is filled with the scent of opportunity. \nThe town bustles with activity as villagers go about their daily routines. \nYou hear the clip-clop of horses' hooves, merchants haggling at market stalls, and the distant chime of a church bell.",
+                fromAfar = "A town peeking over the hills in the distance",
+                enemies = GetRandomEnemies(masterMonsterList)
+            };
             temp.Add(cave);
             temp.Add(meadow);
             temp.Add(field);
             temp.Add(forest);
+            temp.Add(town);
             return temp;
         }
         static void Main(string[] args)
@@ -194,7 +239,7 @@ namespace DnDAdventureGame
 
             //making the list of encounters
 
-            mainListOfEncounters = makeFourEnvironmentsAndPopulate(mainCharacter);
+            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter);
 
             Console.WriteLine("Do you want to examine the bag? y/n");
             string userInput = Console.ReadLine();
@@ -234,11 +279,19 @@ namespace DnDAdventureGame
             Thread.Sleep(5000);
             Console.WriteLine("After careful examination of your surroundings you see game trails leading, roughly, to the North, South, East and West.");
             currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
-            while (!currentEncounter.isTown)
+            while (true)
             {
-                currentEncounter.doWhat();
-                List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
-                currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
+                while (!currentEncounter.isTown)
+                {
+                    currentEncounter.doWhat();
+                    List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
+                    currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
+                }
+                bool adventuring = false;
+                while (!adventuring)
+                {
+                    adventuring = currentEncounter.doTown(mainCharacter);
+                }
             }
         }
     }

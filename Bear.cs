@@ -16,7 +16,7 @@ namespace DnDAdventureGame
             armorScore = 4;
             weaponType = "claws";
             name = "bear";
-            health = 34;
+            health = 25;
             damageDie = 8;
             isAlive = true;
         }

@@ -30,6 +30,36 @@
             this.pC = pC;
         }
 
+        public bool doTown(BasicCharacter character)
+        {
+            Console.WriteLine("What do you want to do?");
+            Console.WriteLine($"you have {character.gold} gold");
+            Console.WriteLine("press r for retire, s for shop, l for a long rest, or a to keep adventuring ");
+            string input = Console.ReadLine();
+            switch (input) 
+            {
+                case "r":
+                    Program.EndGameScreen(character);
+                    return false;
+                case "l":
+                    Console.WriteLine("You spend the night in an inn, this costs you 15 gold");
+                    Console.WriteLine("You waken feeling refreshed, and your health has been returned to maximum");
+                    character.health = character.maxHealth;
+                    character.gold -= 15;
+                    return false;
+                case "a":
+                    Console.WriteLine("Eager to get back to adventuring you head out of town");
+                    return true;
+                case "s":
+                    Shop store = new Shop(character);
+                    return false;
+                default:
+                    Console.WriteLine("not an option");
+                    return false;
+            };
+
+        }
+
         public void doWhat()
         {
             bool correctInput = false;
@@ -117,7 +147,6 @@
         }
         public void UseItem()
         {
-            Console.WriteLine("Your Inventory Contains:");
             pC.CheckInventory();
             bool finished = false;
             while (!finished)

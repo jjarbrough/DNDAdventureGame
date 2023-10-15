@@ -15,6 +15,7 @@ namespace DnDAdventureGame
             isAlive = true;
             name = "Rangrim";
             health = 80;
+            maxHealth = 80;
             chaScore = -1;
             conScore = 3;
             dexScore = 0;

@@ -8,14 +8,15 @@ namespace DnDAdventureGame
 {
     internal abstract class BasicCharacter
     {
+        public List<Items> Inventory = new List<Items>();
         public int armorScore { get; set; }
-        public int gold {  get; set; }
+        public int gold { get; set; }
         public int health { get; set; }
         public string name { get; set; }
         public int dexScore { get; set; } //bonus to running away at first(want to make it a bonus for dodge)
         public int strScore { get; set; } //bonus to damage (want to make damage bonus dependant on weapon type)
         public int chaScore { get; set; } //bonus to prices in town
-        public int intScore { get; set; } //bonus to finding goodies on baddies
+        public int intScore { get; set; } //bonus to finding and disarming traps
         public int conScore { get; set; } //bonus to damage reduction and bonus to health
         public int wisScore { get; set; } //bonus to percieving things around you i:e hidden loot or surprises
         public bool isAlive { get; set; }
@@ -24,9 +25,25 @@ namespace DnDAdventureGame
 
         public abstract int Attack();
         public abstract void Damage(int damage);
-        public abstract void Heal(int health);
-        public abstract bool checkAlive();
+        public abstract void Heal();
+        public virtual void CheckInventory()
+        {
+            Console.WriteLine("Your inventory contains:");
+            foreach (Items packItems in Inventory)
+            {
+                Console.WriteLine($"{packItems.name}");
+            }
+            Console.WriteLine($"And you currently have {gold} gold");
 
-
+        }
+        public virtual void CheckAttributes()
+        {
+            Console.WriteLine($"Your strength score is: {strScore}");
+            Console.WriteLine($"Your intelligence score is: {intScore}");
+            Console.WriteLine($"Your dexterity score is: {dexScore}");
+            Console.WriteLine($"Your charisma score is: {chaScore}");
+            Console.WriteLine($"Your wisdom score is: {wisScore}");
+            Console.WriteLine($"Your constitution score is: {conScore}");
+        }
     }
 }

@@ -21,29 +21,27 @@ namespace DnDAdventureGame
 
         public void Damage(int damage)
         {
-            health -= (damage - (armorScore / 4) - conScore);
+            int totalDamage = damage - conScore;
+
+            if (totalDamage <= 0)
+            {
+                totalDamage = 0;
+            }
+            else
+            {
+                health -= totalDamage;
+            }
             if (health <= 0)
             {
                 isAlive = false;
             }
         }
-        public bool checkAlive ()
-        {
-            if (health > 0)
-            {
-                return true;
-            }
-            else
-            {
-                isAlive = false;
-                return false;
-            }
-        }
+
         public int Attack()
         {
             Random rnd = new Random();
             int damage = rnd.Next((1), (damageDie + 1));
-            Console.WriteLine($"The {name} stabs with its {weaponType} for {damage} damage");
+            Console.WriteLine($"The {name} slashes with its {weaponType} for {damage} damage");
             return damage;
         }
 

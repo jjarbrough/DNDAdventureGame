@@ -10,11 +10,12 @@ namespace DnDAdventureGame
     {
         public Goblin()
         {
+            conScore = 0;
             armorScore = 0;
             Random rnd = new Random();
             gold = rnd.Next(1,16);
             name = "Goblin"; 
-            health = 20;
+            health = 7;
             damageDie = 4;
             isAlive = true;
             weaponType = "knife";

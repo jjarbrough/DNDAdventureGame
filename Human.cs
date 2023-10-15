@@ -23,6 +23,8 @@ namespace DnDAdventureGame
             intScore = 3;
             weapon = "longsword";
             weaponDie = 10;
+            Items healthPotion = new HealthPotion();
+            Inventory.Add(healthPotion);
         }
 
         public override int Attack()
@@ -33,27 +35,63 @@ namespace DnDAdventureGame
             return damage;
         }
 
-        public override bool checkAlive()
-        {
-            if (health > 0)
-            {
-                return true;
-            }
-            else
-            {
-                isAlive = false;
-                return false;
-            }
-        }
 
         public override void Damage(int damage)
         {
-            health -= (damage - (armorScore/4) - conScore);
+            int totalDamage = damage - conScore;
+
+            if (totalDamage <= 0)
+            {
+                totalDamage = 0;
+            }
+            else
+            {
+                health -= totalDamage;
+            }
+            if (health <= 0)
+            {
+                isAlive = false;
+            }
         }
 
-        public override void Heal(int health)
+        public override void Heal()
         {
-            this.health += health;
+            int numberOfHealthPotions = 0;
+            foreach (HealthPotion thing in Inventory)
+            {
+                if (thing is HealthPotion)
+                {
+                    numberOfHealthPotions++;
+                }
+
+            }
+            if (numberOfHealthPotions > 0)
+            {
+                foreach (Items things in Inventory)
+                {
+                    if (things is HealthPotion)
+                    {
+                        Inventory.Remove(things);
+                        if (health + things.healthAmount >= 60)
+                        {
+                            health = 60;
+                            break;
+                        }
+                        else
+                        {
+                            health += things.healthAmount;
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("You can't heal, you don't have any health potions");
+            }
+            Console.WriteLine($"Your health is now {health}");
         }
     }
 }

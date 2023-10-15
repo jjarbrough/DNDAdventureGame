@@ -10,12 +10,13 @@ namespace DnDAdventureGame
     {
         public Bear()
         {
+            conScore = 3;
             Random rnd = new Random();
             gold = rnd.Next(1, 5);
             armorScore = 4;
             weaponType = "claws";
             name = "bear";
-            health = 75;
+            health = 34;
             damageDie = 8;
             isAlive = true;
         }

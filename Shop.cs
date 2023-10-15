@@ -70,10 +70,10 @@ namespace DnDAdventureGame
                 Console.WriteLine($"{shopInventory[i].name} for {shopInventory[i].goldAmount}");
             }
             bool finished = false;
-            Console.WriteLine("h for health potion, a for attribute boost, e to exit");
             while (!finished)
                 {
-                    string input = Console.ReadLine();
+                Console.WriteLine("h for health potion, a for attribute boost, e to exit");
+                string input = Console.ReadLine();
                     switch (input)
                     {
                         case "h":
@@ -84,9 +84,12 @@ namespace DnDAdventureGame
                             atrributeIncrease(pC);
                             character.gold -= statBoost.goldAmount;
                             Console.WriteLine("You feel more powerful");
-                        break;
+                            break;
                         case "e":
                             finished = true;
+                        break;
+                        default: 
+                        Console.WriteLine("Thats not an option");
                         break;
                     };
              }  }

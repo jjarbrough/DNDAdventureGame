@@ -15,6 +15,8 @@ namespace DnDAdventureGame
             pC = bc;
             badGuys = baddies;
         }
+
+        //if surprised the enemy attacks first
         public void EnemyAttackFirst()
         {
             int sum = 0;
@@ -49,6 +51,7 @@ namespace DnDAdventureGame
             }
         }
 
+        //if you surprise the enemy you attack first
         public void YouAttackFirst()
         {
             int sum = 0;
@@ -83,6 +86,8 @@ namespace DnDAdventureGame
                 Console.WriteLine($"Your health is now {pC.health}");
             }
         }
+
+        //If you have a ranged weapon you get a bonus attack first as they close the distance
         public void YouhaveRangedWeapon()
         {
             Console.WriteLine("You have a ranged weapon so get a free attack");

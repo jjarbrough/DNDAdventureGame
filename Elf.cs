@@ -28,6 +28,7 @@ namespace DnDAdventureGame
             Inventory.Add(healthPotion);
         }
 
+        //Do damage
         public override int Attack()
         {
             Random rnd = new Random();
@@ -36,6 +37,7 @@ namespace DnDAdventureGame
             return damage;
         }
 
+        //take damage
         public override void Damage(int damage)
         {
             int totalDamage = damage - conScore;
@@ -54,6 +56,7 @@ namespace DnDAdventureGame
             }
         }
 
+        //use health potin and heal
         public override void Heal()
         {
             int numberOfHealthPotions = 0;

@@ -9,6 +9,7 @@ namespace DnDAdventureGame
 {
     internal static class DeathScreen
     {
+        //If you die
         public static void deathScreen()
         {
             Console.WriteLine(@" __     __                               _____  ______          _____   ");

@@ -8,9 +8,9 @@ namespace DnDAdventureGame
 {
     internal abstract class BasicCharacter
     {
-        public int maxHealth {  get; set; }
+        public int maxHealth {  get; set; } 
 
-        public List<Items> Inventory = new List<Items>();
+        public List<Items> Inventory = new List<Items>();   
         public int armorScore { get; set; }
         public int gold { get; set; }
         public int health { get; set; }
@@ -25,9 +25,17 @@ namespace DnDAdventureGame
         public string weapon { get; set; }
         public int weaponDie { get; set; }
 
+
+        //do damage
         public abstract int Attack();
+
+        //take damage
         public abstract void Damage(int damage);
+
+        //use health potion and heal
         public abstract void Heal();
+
+        //see what you have in your inventory
         public virtual void CheckInventory()
         {
             Console.WriteLine("Your inventory contains:");
@@ -38,6 +46,8 @@ namespace DnDAdventureGame
             Console.WriteLine($"And you currently have {gold} gold");
 
         }
+
+        //see what your attributes are
         public virtual void CheckAttributes()
         {
             Console.WriteLine($"Your strength score is: {strScore}. This increases your damage if you are a dwarf or human");

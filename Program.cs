@@ -5,6 +5,8 @@ namespace DnDAdventureGame
 {
     internal class Program
     {
+
+        //End screen
         public static void EndGameScreen(BasicCharacter character)
         {
             Console.WriteLine(@" __     ______  _    _    _____ _    _ _______      _________      ________ _____  _ _ ");
@@ -39,6 +41,9 @@ namespace DnDAdventureGame
             Thread.Sleep (15000);
             System.Environment.Exit(1);
         }
+
+
+        //takes the encounter master list and returns a new random list of encounters
         public static List<Encounter> GetRandomEncounters(List<Encounter> mainListOfEncounters)
         {
             List<Encounter> temp = new List<Encounter>();
@@ -50,6 +55,8 @@ namespace DnDAdventureGame
             return temp;
         }
 
+
+        //takes a list of monster lists randomly picks one then returns it
         public static List<Enemy> GetRandomEnemies(List<List<Enemy>> mainListOfEnemies)
         {
             List<Enemy> temp = new List<Enemy>();
@@ -61,6 +68,8 @@ namespace DnDAdventureGame
             return temp;
         }
 
+
+        //almost a pause on the dialogue, just to let them catch up
         public static void Continue()
         {
             bool moveOn = false;
@@ -74,13 +83,18 @@ namespace DnDAdventureGame
                 }
             }
         }
+
+
+        //random number generator
         public static int DieRoller(int number)
         {
             Random rnd = new Random();
             int num = rnd.Next(1, (number + 1));
             return num;
         }
-
+        
+        
+        //populating the lists
         public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
             Goblin gobbo = new Goblin();
@@ -176,6 +190,8 @@ namespace DnDAdventureGame
             temp.Add(town);
             return temp;
         }
+
+        //Main running the program
         static void Main(string[] args)
         {
             List<Encounter> mainListOfEncounters = new List<Encounter>();
@@ -191,13 +207,16 @@ namespace DnDAdventureGame
             Console.WriteLine("As you adventure you will come across a wide variety of situations.");
             Console.WriteLine("You can retire anytime when in town and stop your adventure, but have you collected enough?");
             Console.WriteLine("Have you really fulfilled your ambitions yet?");
-            Console.WriteLine("Only you can answer these questions while balancing peril and reward.");
+            Console.WriteLine("Only you can answer these questions while balancing peril with reward.");
             Console.WriteLine("\n\n\n\n\n");
             Console.WriteLine("You wake up, head throbbing, with no recollection of who, or where you are.");
             Console.WriteLine("Groggily you look around and see nothing but dense woods in your immediate surroundings.");
             Console.WriteLine("Something feels off, and as you rub your eyes and sit up, you realize that you're not in your own body");
             Console.WriteLine("Supressing your rising horror you examine this new form.  Looking down at yourself, what do you see?");
             Console.WriteLine("type h for Human Bard, d for dwarf Barbarian, e for Elf Rogue\nnote default is a human Bard");
+
+            //character selection
+
             bool moveOn = false;
             BasicCharacter mainCharacter = new Human();
             while (!moveOn)
@@ -241,6 +260,8 @@ namespace DnDAdventureGame
 
             mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter);
 
+            //backpack and health potion
+
             Console.WriteLine("Do you want to examine the bag? y/n");
             string userInput = Console.ReadLine();
             if (userInput.Equals("y"))
@@ -254,6 +275,9 @@ namespace DnDAdventureGame
             Continue();
             Console.WriteLine($"By your feet you see a {mainCharacter.weapon}. Slowly you pick up the {mainCharacter.weapon}.");
             Console.WriteLine("Just in time! as you stand back up you hear a loud rustling in the branches to your left.");
+
+            //first combat
+
             Thread.Sleep(5000);
             Console.WriteLine("Out pops a goblin!");
             Thread.Sleep(3000);
@@ -278,9 +302,13 @@ namespace DnDAdventureGame
             Console.WriteLine("Searching......");
             Thread.Sleep(5000);
             Console.WriteLine("After careful examination of your surroundings you see game trails leading, roughly, to the North, South, East and West.");
+
+            //Main Gameplay Loop
+
             currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
             while (true)
             {
+                Console.WriteLine("======================  in outerloop ++++++++++++++++++++++++");
                 while (!currentEncounter.isTown)
                 {
                     currentEncounter.doWhat();
@@ -291,7 +319,9 @@ namespace DnDAdventureGame
                 while (!adventuring)
                 {
                     adventuring = currentEncounter.doTown(mainCharacter);
+                    Console.WriteLine("======================  value of adventuring ++++++++++++++++++++++++" + adventuring);
                 }
+                currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
             }
         }
     }

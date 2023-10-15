@@ -49,6 +49,7 @@
                     return false;
                 case "a":
                     Console.WriteLine("Eager to get back to adventuring you head out of town");
+                    Console.WriteLine("======================  in case a, returning true ++++++++++++++++++++++++");
                     return true;
                 case "s":
                     Shop store = new Shop(character);

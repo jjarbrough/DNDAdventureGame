@@ -28,6 +28,7 @@ namespace DnDAdventureGame
             Inventory.Add(healthPotion);
         }
 
+        //do damage 
 
         public override int Attack()
         {
@@ -37,6 +38,7 @@ namespace DnDAdventureGame
             return damage;
         }
 
+        //take damage and check if alive
         public override void Damage(int damage)
         {
             int totalDamage = damage - conScore;
@@ -55,6 +57,7 @@ namespace DnDAdventureGame
             }
         }
 
+        //use health potion and heal
         public override void Heal()
         {
             //figure out number of health potions

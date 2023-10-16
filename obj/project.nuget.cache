@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QsgkvIilQaY5aQ4AGjAnmlKGR3WTk9o+bbA0N0C21P7Am8Bbm+5QajwaIJ0AQFIbGzVa5ZdFYXJ8R8BDATn+Nw==",
+  "dgSpecHash": "hC98zbsRix8T6+BvgrAFXZfXLVJJKpNwsx+p0YAV+3Ns5fCnRMfqkAnuP8Lmlq+451NhOXrkAXQ0tKqUxxNOrg==",
   "success": true,
   "projectFilePath": "C:\\Users\\jjarb\\source\\repos\\DnDAdventureGame\\DnDAdventureGame.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\jjarb\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\jjarb\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\jjarb\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

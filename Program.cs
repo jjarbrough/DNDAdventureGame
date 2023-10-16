@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Remoting;
 using System.Security.Cryptography.X509Certificates;
+using System.Media;
 
 namespace DnDAdventureGame
 {
@@ -26,9 +27,13 @@ namespace DnDAdventureGame
             {
                 Console.WriteLine("You retire destitute owing money all over town. You die alone and friendless.");
             }
-            else if (option >= 0 && option <100)
+            else if (option >= 0 && option <50)
             {
                 Console.WriteLine("You retire as a peasant. It's an honest living");
+            }
+            else if (option >= 50 && option < 100)
+            {
+                Console.WriteLine("While not poor by any means, you constantly think about your adventuring days and what could have been.");
             }
             else if (option >= 100 && option < 150)
             {
@@ -100,7 +105,7 @@ namespace DnDAdventureGame
             int count = (Program.DieRoller(5) - 1);
             for (int i = 0; i < count; i++)
             {
-                int baddy = Program.DieRoller(4);
+                int baddy = Program.DieRoller(5);
                 if (baddy == 1)
                 {
                     Goblin goblin = new Goblin();
@@ -116,10 +121,16 @@ namespace DnDAdventureGame
                     Kobold kobold = new Kobold();
                     enemyList.Add(kobold);
                 }
+                else if (baddy == 4)
+                {
+                    Troll troll = new Troll();
+                    enemyList.Add(troll);
+                }
             }
             return enemyList;
         }
 
+        //populates a list with items randomly
         public static List<Items> ItemPopulator()
         {
             List<Items> itemList = new List<Items>();
@@ -240,6 +251,12 @@ namespace DnDAdventureGame
             Console.WriteLine(@" | |__| | | | | |__| |  / ____ \ (_| |\ V /  __/ | | | |_| |_| | | |  __/ | |__| | (_| | | | | | |  __/");
             Console.WriteLine(@" |_____/|_| |_|_____/  /_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___|  \_____|\__,_|_| |_| |_|\___|");
             Console.WriteLine("\n\n\n\n\n");
+            if (OperatingSystem.IsWindows())
+            {
+                SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
+                player.Load();
+                player.PlayLooping();
+            }
             Console.WriteLine("In this game you will adventure through the wilderness collecting gold.");
             Console.WriteLine("As you adventure you will come across a wide variety of situations.");
             Console.WriteLine("You can retire anytime when in town and stop your adventure, but have you collected enough?");

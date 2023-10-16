@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -60,8 +61,14 @@ namespace DnDAdventureGame
             Console.WriteLine($"Your constitution score is: {conScore}. This increases your health and damage resistance");
         }
 
-        public virtual void AddToPack(Items item)
+        public virtual void AddToPack(Items item, BasicCharacter character)
         {
+            if (item is SackOfGold)
+            {
+                Console.WriteLine($"You found a pouch of gold containing {item.goldAmount} gold");
+                character.gold += item.goldAmount;
+                Console.WriteLine($"you now have {character.gold}");
+            }
             if (hasPack)
             {
                 Console.WriteLine($"You add {item.name} to your pack");

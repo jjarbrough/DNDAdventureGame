@@ -251,12 +251,16 @@ namespace DnDAdventureGame
             Console.WriteLine(@" | |__| | | | | |__| |  / ____ \ (_| |\ V /  __/ | | | |_| |_| | | |  __/ | |__| | (_| | | | | | |  __/");
             Console.WriteLine(@" |_____/|_| |_|_____/  /_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___|  \_____|\__,_|_| |_| |_|\___|");
             Console.WriteLine("\n\n\n\n\n");
+
+            //plays background music
             if (OperatingSystem.IsWindows())
             {
                 SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
                 player.Load();
                 player.PlayLooping();
             }
+
+
             Console.WriteLine("In this game you will adventure through the wilderness collecting gold.");
             Console.WriteLine("As you adventure you will come across a wide variety of situations.");
             Console.WriteLine("You can retire anytime when in town and stop your adventure, but have you collected enough?");

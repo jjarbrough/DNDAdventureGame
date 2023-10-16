@@ -62,7 +62,7 @@
         }
 
         //loop of options while adventuring
-        public void doWhat()
+        public void doWhat(BasicCharacter character)
         {
             bool correctInput = false;
             while (!correctInput)
@@ -102,7 +102,7 @@
                 string input = Console.ReadLine();
                 if (input.Equals("f"))
                 {
-                    Stay();
+                    Stay(character);
                     correctInput = true;
                 }
                 else if (input.Equals("r"))
@@ -112,14 +112,14 @@
                     {
                         Console.WriteLine("You tried to run but couldnt get away!");
                         Thread.Sleep(3000);
-                        Stay();
+                        Stay(character);
                     }
                 }
                 else if (input.Equals("u"))
                 {
                     correctInput = true;
                     UseItem();
-                    Stay();
+                    Stay(character);
                 }
                 else
                 {
@@ -141,7 +141,7 @@
             }
         }
         //if you stay and fight
-        public void Stay() 
+        public void Stay(BasicCharacter character) 
         {
             if (enemies.Count > 0)
             { 
@@ -169,7 +169,7 @@
                         newCombat.YouhaveRangedWeapon();
                     }
                 }
-                SurvivedEncounter();
+                SurvivedEncounter(character);
             }
         }
 
@@ -197,7 +197,7 @@
             }
         }
         //when you survive an encounter
-        public void SurvivedEncounter()
+        public void SurvivedEncounter(BasicCharacter character)
         {
             Console.WriteLine("You take a deep breath and look around you, relishing the sweet taste of victory");
             Console.WriteLine("searching around the area you find:");
@@ -215,7 +215,7 @@
                 {
                     Console.WriteLine($"{Items.name}");
                     Thread.Sleep(2000);
-                    pC.AddToPack(Items);
+                    pC.AddToPack(Items,character);
                 }
                 Console.WriteLine("You have added these items to your inventory");
             }

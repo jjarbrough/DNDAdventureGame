@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,6 +68,7 @@ namespace DnDAdventureGame
             shopInventory.Add(healthPotion);
             shopInventory.Add(statBoost);
             Console.WriteLine("As you push open the creaking wooden door, a gust of cool, musty air greets you. \nThe dimly lit interior of the shop is filled with an array of curious and rustic items. \nWooden shelves groan under the weight of handcrafted leather goods, pottery, and pewter mugs. \nThe flickering glow of oil lamps casts dancing shadows on the rough-hewn stone walls. \nThe shopkeeper stands behind a weathered oak counter, ready to assist you with a warm, welcoming smile. \nThe faint scent of herbs and spices wafts from a corner, where dried herbs hang from the ceiling");
+            pC.CheckInventory();
             Console.WriteLine($"The shopkeeper has the following items for sale:");
             for (int i = 0; i < shopInventory.Count(); i++)
             {
@@ -82,7 +84,7 @@ namespace DnDAdventureGame
                         case "h":
                         if (character.gold >= healthPotion.goldAmount)
                         {
-                            character.AddToPack(healthPotion);
+                            character.AddToPack(healthPotion, pC);
                             character.gold -= (healthPotion.goldAmount - (character.chaScore * 3));
                         }
                         else

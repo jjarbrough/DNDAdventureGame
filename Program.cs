@@ -140,6 +140,11 @@ namespace DnDAdventureGame
                 HealthPotion healthPotion = new HealthPotion();
                 itemList.Add(healthPotion);
             }
+            else if (count == 9 || count == 8)
+            { 
+                SackOfGold sack = new SackOfGold();
+                itemList.Add(sack);
+            }
             return itemList;
         }
 
@@ -214,11 +219,11 @@ namespace DnDAdventureGame
                 pC = mainCharacter,
                 isNoticed = false,
                 isTown = false,
-                locationDescription = "As you step into the bog, the ground beneath your feet gives way, sinking into a squelchy, muddy morass. \nThe air is thick with a damp, earthy aroma, and the dense fog conceals much of the landscape. \nWaterlogged plants with twisted, moss-covered branches reach out from the murky waters, and the eerie chorus of croaking frogs and buzzing insects fills the air. \nYour every step is accompanied by a sucking sound as your boots struggle to break free from the mire, \nfmaking each movement a slow and cautious endeavor in this eerie, desolate wetland.",
+                locationDescription = "As you step into the bog, the ground beneath your feet gives way, sinking into a squelchy, muddy morass. \nThe air is thick with a damp, earthy aroma, and the dense fog conceals much of the landscape. \nWaterlogged plants with twisted, moss-covered branches reach out from the murky waters, and the eerie chorus of croaking frogs and buzzing insects fills the air. \nYour every step is accompanied by a sucking sound as your boots struggle to break free from the mire, \nmaking each movement a slow and cautious endeavor in this eerie, desolate wetland.",
                 fromAfar = "What appears to be wetlands covered in fog",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
-            Encounter Mountain = new Encounter()
+            Encounter mountain = new Encounter()
             {   
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
@@ -229,13 +234,25 @@ namespace DnDAdventureGame
                 fromAfar = "majestic mountain peaks disappearing into the clouds",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
+            Encounter river = new Encounter()
+            {
+                loot = ItemPopulator(),
+                difficultyToRun = 6,
+                pC = mainCharacter,
+                isNoticed = true,
+                isTown = false,
+                locationDescription = "Approaching a river, you see the glistening water ahead. \nThe gentle sound of flowing water fills the air, and the earthy scent of the surrounding nature surrounds you. \nYou walk toward the riverbank, feeling the cool breeze and the soft, uneven ground underfoot. \nThe lush greenery and wildlife along the river's edge add to the tranquil atmosphere, making it a serene and inviting spot.",
+                fromAfar = "Ariver winding its way in the distance",
+                enemies = GetRandomEnemies(masterMonsterList)
+            };
             temp.Add(cave);
             temp.Add(meadow);
             temp.Add(field);
             temp.Add(forest);
             temp.Add(town);
             temp.Add(bog);
-            temp.Add(Mountain);
+            temp.Add(mountain);
+            temp.Add(river);
             return temp;
         }
 
@@ -328,7 +345,7 @@ namespace DnDAdventureGame
                 Console.WriteLine("You take the pack with you thinking it might be useful");
                 mainCharacter.hasPack = true;
                 Items healthPotion = new HealthPotion();
-                mainCharacter.AddToPack(healthPotion);
+                mainCharacter.AddToPack(healthPotion, mainCharacter);
                 Thread.Sleep(1000);
                 mainCharacter.CheckInventory();
             }
@@ -370,7 +387,7 @@ namespace DnDAdventureGame
             {
                 while (!currentEncounter.isTown)
                 {
-                    currentEncounter.doWhat();
+                    currentEncounter.doWhat(mainCharacter);
                     List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace DnDAdventureGame
 {
     internal abstract class BasicCharacter
     {
+        public bool hasPack { get; set; } = false;
         public int maxHealth {  get; set; } 
 
         public List<Items> Inventory = new List<Items>();   
@@ -56,6 +58,19 @@ namespace DnDAdventureGame
             Console.WriteLine($"Your charisma score is: {chaScore}. This decreases the amount of gold upgrades cost in town");
             Console.WriteLine($"Your wisdom score is: {wisScore}. This increases your chances of finding treasures in the environment");
             Console.WriteLine($"Your constitution score is: {conScore}. This increases your health and damage resistance");
+        }
+
+        public virtual void AddToPack(Items item)
+        {
+            if (hasPack)
+            {
+                Console.WriteLine($"You add {item.name} to your pack");
+                Inventory.Add(item);
+            }
+            else
+            {
+                Console.WriteLine("You have no where to put that");
+            }
         }
     }
 }

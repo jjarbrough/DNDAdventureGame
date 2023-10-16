@@ -215,7 +215,7 @@
                 {
                     Console.WriteLine($"{Items.name}");
                     Thread.Sleep(2000);
-                    pC.Inventory.Add(Items);
+                    pC.AddToPack(Items);
                 }
                 Console.WriteLine("You have added these items to your inventory");
             }

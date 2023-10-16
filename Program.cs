@@ -93,7 +93,7 @@ namespace DnDAdventureGame
             return num;
         }
 
-        //testing random enemy populator
+        //random enemy populator returns a random list of enemies
         public static List<Enemy> EnemyPopulator()
         {
             List<Enemy> enemyList = new List<Enemy>();
@@ -120,6 +120,18 @@ namespace DnDAdventureGame
             return enemyList;
         }
 
+        public static List<Items> ItemPopulator()
+        {
+            List<Items> itemList = new List<Items>();
+            int count = DieRoller(10);
+            if (count == 10)
+            {
+                HealthPotion healthPotion = new HealthPotion();
+                itemList.Add(healthPotion);
+            }
+            return itemList;
+        }
+
         //populating the lists
         public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
@@ -133,6 +145,7 @@ namespace DnDAdventureGame
             List<Encounter> temp = new List<Encounter>();
             Encounter cave = new Encounter()
             {
+                loot = ItemPopulator(),
                 difficultyToRun = 12,
                 pC = mainCharacter,
                 isNoticed = false,
@@ -143,6 +156,7 @@ namespace DnDAdventureGame
             };
             Encounter meadow = new Encounter()
             {
+                loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
                 isNoticed = true,
@@ -152,7 +166,8 @@ namespace DnDAdventureGame
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter field = new Encounter()
-            {
+            { 
+                loot = ItemPopulator(),
                 difficultyToRun = 5,
                 pC = mainCharacter,
                 isNoticed = true,
@@ -162,7 +177,7 @@ namespace DnDAdventureGame
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter forest = new Encounter()
-            {
+            {   loot = ItemPopulator(),
                 difficultyToRun = 10,
                 pC = mainCharacter,
                 isNoticed = true,
@@ -182,7 +197,8 @@ namespace DnDAdventureGame
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter bog = new Encounter()
-            {
+            {   
+                loot = ItemPopulator(),
                 difficultyToRun = 15,
                 pC = mainCharacter,
                 isNoticed = false,
@@ -191,12 +207,24 @@ namespace DnDAdventureGame
                 fromAfar = "What appears to be wetlands covered in fog",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
+            Encounter Mountain = new Encounter()
+            {   
+                loot = ItemPopulator(),
+                difficultyToRun = 6,
+                pC = mainCharacter,
+                isNoticed = false,
+                isTown = false,
+                locationDescription = "Walking up to a mountain is a gradual journey of ascending terrain. \nAs you approach the mountain, the landscape becomes steeper, and the air grows crisper. \nThe path typically leads through forests, meadows, or rocky trails, with each step offering a closer view of the majestic peak ahead. \nThe mountain looms larger and more imposing as you get nearer, and the anticipation of the climb ahead intensifies with each stride.",
+                fromAfar = "majestic mountain peaks disappearing into the clouds",
+                enemies = GetRandomEnemies(masterMonsterList)
+            };
             temp.Add(cave);
             temp.Add(meadow);
             temp.Add(field);
             temp.Add(forest);
             temp.Add(town);
             temp.Add(bog);
+            temp.Add(Mountain);
             return temp;
         }
 
@@ -276,8 +304,10 @@ namespace DnDAdventureGame
             if (userInput.Equals("y"))
             {
                 Console.WriteLine("examining the pack you find one health potion");
+                Console.WriteLine("You take the pack with you thinking it might be useful");
+                mainCharacter.hasPack = true;
                 Items healthPotion = new HealthPotion();
-                mainCharacter.Inventory.Add(healthPotion);
+                mainCharacter.AddToPack(healthPotion);
                 Thread.Sleep(1000);
                 mainCharacter.CheckInventory();
             }

@@ -58,7 +58,7 @@ namespace DnDAdventureGame
             }
         }
 
-        //shop options
+        //shop options and purchasing
         public Shop(BasicCharacter pC)
         {
             character = pC;
@@ -80,13 +80,27 @@ namespace DnDAdventureGame
                     switch (input)
                     {
                         case "h":
-                            character.Inventory.Add(healthPotion);
+                        if (character.gold >= healthPotion.goldAmount)
+                        {
+                            character.AddToPack(healthPotion);
                             character.gold -= (healthPotion.goldAmount - (character.chaScore * 3));
+                        }
+                        else
+                        {
+                            Console.WriteLine("you can't afford this");
+                        }
                             break;
                         case "a":
+                        if (character.gold >= statBoost.goldAmount)
+                        {
                             atrributeIncrease(pC);
                             character.gold -= (statBoost.goldAmount - (character.chaScore * 3));
                             Console.WriteLine("You feel more powerful");
+                        }
+                        else
+                        {
+                            Console.WriteLine("you can't afford this");
+                        }
                             break;
                         case "e":
                             finished = true;

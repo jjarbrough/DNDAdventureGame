@@ -187,7 +187,7 @@ namespace DnDAdventureGame
             };
             Encounter field = new Encounter()
             { 
-                soundEffects = "489815__qedionium__field-recording-under-a-power-pilon-ambiance.wav",
+                soundEffects = "135472__kvgarlic__summeropenfielddusk.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 5,
                 pC = mainCharacter,
@@ -222,7 +222,7 @@ namespace DnDAdventureGame
             };
             Encounter bog = new Encounter()
             {   
-                soundEffects = "101125__ironchicken__a0000013",
+                soundEffects = "399744__inspectorj__ambience-florida-frogs-gathering-a.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 15,
                 pC = mainCharacter,
@@ -234,7 +234,7 @@ namespace DnDAdventureGame
             };
             Encounter mountain = new Encounter()
             {
-                soundEffects = "260567__felixblume__footsteps-in-the-snow-close-recording.wav",
+                soundEffects = "543449__kostas17__howling-wind.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
@@ -405,13 +405,12 @@ namespace DnDAdventureGame
             while (true)
             {
                 while (!currentEncounter.isTown)
-                {
-                    if (currentEncounter.soundEffects != "")
-                    {   
+                {      
+                    //playing the sound effects for the environments
                         player.SoundLocation = currentEncounter.soundEffects;
                         player.Load();
                         player.PlayLooping();
-                    }
+                    
                     currentEncounter.doWhat(mainCharacter, player);
                     List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);

@@ -45,6 +45,8 @@ namespace DnDAdventureGame
                         Console.WriteLine($"You killed the {badGuy.name}!");
                         pC.gold += badGuy.gold;
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
+                        Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
+                        pC.gold += pC.intScore;
                     }
                 }
             }
@@ -77,6 +79,8 @@ namespace DnDAdventureGame
                         Console.WriteLine($"You killed the {badGuy.name}!");
                         pC.gold += badGuy.gold;
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
+                        Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
+                        pC.gold += pC.intScore;
                         break;
                     }
                     int num = badGuy.Attack();
@@ -115,6 +119,8 @@ namespace DnDAdventureGame
                 Console.WriteLine($"You killed the {badGuys[0].name}!");
                 pC.gold += badGuys[0].gold;
                 Console.WriteLine($"You collect {badGuys[0].gold} gold off of the {badGuys[0].name}'s corpse");
+                Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
+                pC.gold += pC.intScore;
             }
             int sum = 0;
             foreach (Enemy badGuy in badGuys)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Troll : Enemy
+    public class Troll : Enemy
     {
         public Troll()
         {

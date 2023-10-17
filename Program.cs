@@ -302,7 +302,7 @@ namespace DnDAdventureGame
             Console.WriteLine("Something feels off, and as you rub your eyes and sit up, you realize that you're not in your own body");
             Console.WriteLine("Supressing your rising horror you examine this new form.  Looking down at yourself, what do you see?");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("type h for Human Bard, d for dwarf Barbarian, e for Elf Rogue\nnote default is a human Bard");
+            Console.WriteLine("type h for Human Bard, d for dwarf Barbarian, e for Elf Rogue \nDefault is a human");
             Console.ForegroundColor = ConsoleColor.White;
 
             //character selection
@@ -324,7 +324,7 @@ namespace DnDAdventureGame
                         mainCharacter = new Elf();
                         break;
                     default:
-                        Console.WriteLine("not an option so you are a human!");
+                        Console.WriteLine("not an option! Default race is a human");
                         mainCharacter = new Human();
                         break;
                 }

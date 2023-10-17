@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +18,11 @@ namespace DnDAdventureGame
         }
 
         //if surprised the enemy attacks first
-        public void EnemyAttackFirst()
+        public void EnemyAttackFirst(SoundPlayer player)
         {
+            player.SoundLocation = "Wounded (1).wav";
+            player.Load();
+            player.PlayLooping();
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
             {
@@ -46,14 +50,20 @@ namespace DnDAdventureGame
             }
             if (pC.isAlive)
             {
+                player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
+                player.Load();
+                player.PlayLooping();
                 Console.WriteLine($"You won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
             }
         }
 
         //if you surprise the enemy you attack first
-        public void YouAttackFirst()
+        public void YouAttackFirst(SoundPlayer player)
         {
+            player.SoundLocation = "Wounded (1).wav";
+            player.Load();
+            player.PlayLooping();
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
             {
@@ -82,14 +92,20 @@ namespace DnDAdventureGame
             }
             if (pC.isAlive)
             {
+                player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
+                player.Load();
+                player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
             }
         }
 
         //If you have a ranged weapon you get a bonus attack first as they close the distance
-        public void YouhaveRangedWeapon()
+        public void YouhaveRangedWeapon(SoundPlayer player)
         {
+            player.SoundLocation = "Wounded (1).wav";
+            player.Load();
+            player.PlayLooping();
             Console.WriteLine("You have a ranged weapon so get a free attack");
             int num2 = pC.Attack();
             Thread.Sleep(2000);
@@ -127,6 +143,9 @@ namespace DnDAdventureGame
         
             if (pC.isAlive)
             {
+                player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
+                player.Load();
+                player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
             }

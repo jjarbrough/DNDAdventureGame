@@ -1,4 +1,6 @@
-﻿namespace DnDAdventureGame
+﻿using System.Media;
+
+namespace DnDAdventureGame
 {
     internal class Encounter
     {
@@ -65,7 +67,7 @@
         }
 
         //loop of options while adventuring
-        public void doWhat(BasicCharacter character)
+        public void doWhat(BasicCharacter character, SoundPlayer player)
         {
             bool correctInput = false;
             while (!correctInput)
@@ -112,7 +114,7 @@
                 string input = Console.ReadLine();
                 if (input.Equals("f"))
                 {
-                    Stay(character);
+                    Stay(character, player);
                     correctInput = true;
                 }
                 else if (input.Equals("r"))
@@ -124,14 +126,14 @@
                         Console.WriteLine("You tried to run but couldnt get away!");
                         Console.ForegroundColor = ConsoleColor.White;
                         Thread.Sleep(3000);
-                        Stay(character);
+                        Stay(character, player);
                     }
                 }
                 else if (input.Equals("u"))
                 {
                     correctInput = true;
                     UseItem();
-                    Stay(character);
+                    Stay(character, player);
                 }
                 else
                 {
@@ -153,7 +155,7 @@
             }
         }
         //if you stay and fight
-        public void Stay(BasicCharacter character) 
+        public void Stay(BasicCharacter character, SoundPlayer player) 
         {
             if (enemies.Count > 0)
             { 
@@ -163,22 +165,22 @@
 
                     if (pC is Human || pC is Dwarf)
                     {
-                        newCombat.EnemyAttackFirst();
+                        newCombat.EnemyAttackFirst(player);
                     }
                     else
                     {
-                        newCombat.YouhaveRangedWeapon();
+                        newCombat.YouhaveRangedWeapon(player);
                     }
                 }
                 else
                 {
                     if (pC is Human || pC is Dwarf)
                     {
-                        newCombat.YouAttackFirst();
+                        newCombat.YouAttackFirst(player);
                     }
                     else
                     {
-                        newCombat.YouhaveRangedWeapon();
+                        newCombat.YouhaveRangedWeapon(player);
                     }
                 }
                 SurvivedEncounter(character);

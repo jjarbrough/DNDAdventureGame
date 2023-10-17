@@ -29,3 +29,4 @@ C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\378209__felixblume
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\489815__qedionium__field-recording-under-a-power-pilon-ambiance.wav
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\531724__klankbeeld__forest-summer-roond-021-200619_0186.wav
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\584595__tosha73__mountain-river.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\Wounded (1).wav

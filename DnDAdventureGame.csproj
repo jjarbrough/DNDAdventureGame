@@ -39,6 +39,9 @@
     <None Update="676787__stevenmaertens__blinking-forest-acoustic.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Wounded %281%29.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

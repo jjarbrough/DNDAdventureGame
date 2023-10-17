@@ -383,11 +383,11 @@ namespace DnDAdventureGame
             Combat firstCombat = new Combat(mainCharacter, enemies);
             if (mainCharacter is Human || mainCharacter is Dwarf)
             {
-                firstCombat.EnemyAttackFirst();
+                firstCombat.EnemyAttackFirst(player);
             }
             else
             {
-                firstCombat.YouhaveRangedWeapon();
+                firstCombat.YouhaveRangedWeapon(player);
             }
             Thread.Sleep(1000);
             Console.WriteLine("Whew that was a close one! Good thing it was just a goblin! A little loot never hurt anyone either!");
@@ -412,7 +412,7 @@ namespace DnDAdventureGame
                         player.Load();
                         player.PlayLooping();
                     }
-                    currentEncounter.doWhat(mainCharacter);
+                    currentEncounter.doWhat(mainCharacter, player);
                     List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }

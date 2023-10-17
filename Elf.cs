@@ -33,7 +33,9 @@ namespace DnDAdventureGame
         {
             Random rnd = new Random();
             int damage = rnd.Next((1 + dexScore), (weaponDie + dexScore + 1));
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"You shoot your {weapon} and do {damage} damage");
+            Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }
 

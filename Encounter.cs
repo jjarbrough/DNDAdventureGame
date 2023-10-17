@@ -35,7 +35,9 @@
         {
             Console.WriteLine("What do you want to do?");
             Console.WriteLine($"you have {character.gold} gold");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("press r for retire, s for shop, l for a long rest, or a to keep adventuring ");
+            Console.ForegroundColor = ConsoleColor.White;
             string input = Console.ReadLine();
             switch (input) 
             {
@@ -67,12 +69,15 @@
             bool correctInput = false;
             while (!correctInput)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"{locationDescription}");
+                Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(10000);
                 Console.WriteLine($"you see:");
                 if(enemies.Count == 0)
                 {
                     Console.WriteLine("no enemies in your current vicinity");
+
                     Thread.Sleep(3000);
                 }
                 foreach (Enemy enemy in enemies)
@@ -93,11 +98,15 @@
                 Console.WriteLine("What do you want to do?");
                 if (enemies.Count() > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("f for fight, r for run or u for use item");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("f for forage, r for run or u for use item");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 string input = Console.ReadLine();
                 if (input.Equals("f"))
@@ -110,7 +119,9 @@
                     correctInput = true;
                     if (!TryRun())
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("You tried to run but couldnt get away!");
+                        Console.ForegroundColor = ConsoleColor.White;
                         Thread.Sleep(3000);
                         Stay(character);
                     }
@@ -171,6 +182,10 @@
                 }
                 SurvivedEncounter(character);
             }
+            else
+            {
+                SurvivedEncounter(character);
+            }
         }
 
         //if you use an item
@@ -180,7 +195,9 @@
             bool finished = false;
             while (!finished)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("What would you like to use? Type h for health potion or e to exit");
+                Console.ForegroundColor = ConsoleColor.White;
                 string holder = Console.ReadLine();
                 if (holder.Equals("h"))
                 {
@@ -228,11 +245,13 @@
             var currentEncounter = new Encounter();
             while (!correctFeedback)
             {
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine($"To the North you see: {directions[0].fromAfar}");
                 Console.WriteLine($"To the South lies: {directions[1].fromAfar}");
                 Console.WriteLine($"East of you, you see:{directions[2].fromAfar}");
                 Console.WriteLine($"Westways lies:{directions[3].fromAfar}");
                 Console.WriteLine("Which general direction would you like to head?\nn/s/e/w");
+                Console.ForegroundColor = ConsoleColor.White;
                 string input = Console.ReadLine();
                 if (input.Equals("n"))
                 {

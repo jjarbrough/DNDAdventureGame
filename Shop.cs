@@ -15,7 +15,9 @@ namespace DnDAdventureGame
         //selection statement for if they choose a stat boost
         public void atrributeIncrease(BasicCharacter character)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Which stat would you like to boost?\n s for strength, i for intelligence, d for dexterity, c for constitution, w for wisdom, h for charisma");
+            Console.ForegroundColor = ConsoleColor.White;
             string input = Console.ReadLine();
             bool correctInput = false;
             while (!correctInput)
@@ -65,10 +67,14 @@ namespace DnDAdventureGame
             character = pC;
             Items healthPotion = new HealthPotion();
             Items statBoost = new StatBoost();
+            Items pack = new Pack();
             shopInventory.Add(healthPotion);
             shopInventory.Add(statBoost);
+            shopInventory.Add(pack);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("As you push open the creaking wooden door, a gust of cool, musty air greets you. \nThe dimly lit interior of the shop is filled with an array of curious and rustic items. \nWooden shelves groan under the weight of handcrafted leather goods, pottery, and pewter mugs. \nThe flickering glow of oil lamps casts dancing shadows on the rough-hewn stone walls. \nThe shopkeeper stands behind a weathered oak counter, ready to assist you with a warm, welcoming smile. \nThe faint scent of herbs and spices wafts from a corner, where dried herbs hang from the ceiling");
             pC.CheckInventory();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"The shopkeeper has the following items for sale:");
             for (int i = 0; i < shopInventory.Count(); i++)
             {
@@ -77,7 +83,9 @@ namespace DnDAdventureGame
             bool finished = false;
             while (!finished)
                 {
-                Console.WriteLine("h for health potion, a for attribute boost, e to exit");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("h for health potion, a for attribute boost, b for back pack e to exit");
+                Console.ForegroundColor = ConsoleColor.White;
                 string input = Console.ReadLine();
                     switch (input)
                     {
@@ -104,6 +112,18 @@ namespace DnDAdventureGame
                             Console.WriteLine("you can't afford this");
                         }
                             break;
+                        case "b":
+                        if (character.gold >= pack.goldAmount)
+                        {
+                            character.gold -= (pack.goldAmount - (character.chaScore * 3));
+                            Console.WriteLine("You now have a pack to hold items you find");
+                            character.hasPack = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you can't afford this");
+                        }
+                        break;
                         case "e":
                             finished = true;
                         break;

@@ -34,7 +34,9 @@ namespace DnDAdventureGame
         {
             Random rnd = new Random();
             int damage = rnd.Next((1 + strScore), (weaponDie + strScore + 1));
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"You swing your {weapon} and do {damage} damage");
+            Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }
 

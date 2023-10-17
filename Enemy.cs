@@ -42,7 +42,9 @@ namespace DnDAdventureGame
         {
             Random rnd = new Random();
             int damage = rnd.Next((1), (damageDie + 1));
-            Console.WriteLine($"The {name} slashes with its {weaponType} for {damage} damage");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"The {name} swings with its {weaponType} for {damage} damage");
+            Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }
 

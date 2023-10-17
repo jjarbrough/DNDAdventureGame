@@ -80,7 +80,9 @@ namespace DnDAdventureGame
             bool moveOn = false;
             while (!moveOn)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Are you ready to continue? y/n");
+                Console.ForegroundColor = ConsoleColor.White;
                 string response = Console.ReadLine();
                 if (response.Equals("y"))
                 {
@@ -242,7 +244,7 @@ namespace DnDAdventureGame
                 isNoticed = true,
                 isTown = false,
                 locationDescription = "Approaching a river, you see the glistening water ahead. \nThe gentle sound of flowing water fills the air, and the earthy scent of the surrounding nature surrounds you. \nYou walk toward the riverbank, feeling the cool breeze and the soft, uneven ground underfoot. \nThe lush greenery and wildlife along the river's edge add to the tranquil atmosphere, making it a serene and inviting spot.",
-                fromAfar = "Ariver winding its way in the distance",
+                fromAfar = "A wriver winding its way in the distance",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             temp.Add(cave);
@@ -261,6 +263,7 @@ namespace DnDAdventureGame
         {
             List<Encounter> mainListOfEncounters = new List<Encounter>();
             Encounter currentEncounter = new Encounter();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(@"  _____        _____                _                 _                     _____                      ");
             Console.WriteLine(@" |  __ \      |  __ \      /\      | |               | |                   / ____|                     ");
             Console.WriteLine(@" | |  | |_ __ | |  | |    /  \   __| |_   _____ _ __ | |_ _   _ _ __ ___  | |  __  __ _ _ __ ___   ___ ");
@@ -268,7 +271,7 @@ namespace DnDAdventureGame
             Console.WriteLine(@" | |__| | | | | |__| |  / ____ \ (_| |\ V /  __/ | | | |_| |_| | | |  __/ | |__| | (_| | | | | | |  __/");
             Console.WriteLine(@" |_____/|_| |_|_____/  /_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___|  \_____|\__,_|_| |_| |_|\___|");
             Console.WriteLine("\n\n\n\n\n");
-
+            Console.ForegroundColor = ConsoleColor.White;
             //plays background music
             if (OperatingSystem.IsWindows())
             {
@@ -288,7 +291,9 @@ namespace DnDAdventureGame
             Console.WriteLine("Groggily you look around and see nothing but dense woods in your immediate surroundings.");
             Console.WriteLine("Something feels off, and as you rub your eyes and sit up, you realize that you're not in your own body");
             Console.WriteLine("Supressing your rising horror you examine this new form.  Looking down at yourself, what do you see?");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("type h for Human Bard, d for dwarf Barbarian, e for Elf Rogue\nnote default is a human Bard");
+            Console.ForegroundColor = ConsoleColor.White;
 
             //character selection
 
@@ -314,7 +319,9 @@ namespace DnDAdventureGame
                         break;
                 }
                 mainCharacter.CheckAttributes();
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Would you like to continue? y/n");
+                Console.ForegroundColor = ConsoleColor.White;
                 string response1 = Console.ReadLine();
                 if (response1.Equals("y"))
                 {
@@ -337,7 +344,9 @@ namespace DnDAdventureGame
 
             //backpack and health potion
 
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Do you want to examine the bag? y/n");
+            Console.ForegroundColor = ConsoleColor.White;
             string userInput = Console.ReadLine();
             if (userInput.Equals("y"))
             {

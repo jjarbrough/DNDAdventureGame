@@ -163,6 +163,7 @@ namespace DnDAdventureGame
             List<Encounter> temp = new List<Encounter>();
             Encounter cave = new Encounter()
             {
+                soundEffects = "246230__andreangelo__squelchy-mouth-cave-hq.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 12,
                 pC = mainCharacter,
@@ -174,6 +175,7 @@ namespace DnDAdventureGame
             };
             Encounter meadow = new Encounter()
             {
+                soundEffects = "378209__felixblume__the-sounds-of-the-meadow-gran-sabana-venezuela.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
@@ -185,6 +187,7 @@ namespace DnDAdventureGame
             };
             Encounter field = new Encounter()
             { 
+                soundEffects = "489815__qedionium__field-recording-under-a-power-pilon-ambiance.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 5,
                 pC = mainCharacter,
@@ -195,7 +198,9 @@ namespace DnDAdventureGame
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter forest = new Encounter()
-            {   loot = ItemPopulator(),
+            {
+                soundEffects = "531724__klankbeeld__forest-summer-roond-021-200619_0186.wav",
+                loot = ItemPopulator(),
                 difficultyToRun = 10,
                 pC = mainCharacter,
                 isNoticed = true,
@@ -206,6 +211,7 @@ namespace DnDAdventureGame
             };
             Encounter town = new Encounter()
             {
+                soundEffects = "423119__ogsoundfx__medieval-city-sample.wav",
                 difficultyToRun = 12,
                 pC = mainCharacter,
                 isNoticed = true,
@@ -216,6 +222,7 @@ namespace DnDAdventureGame
             };
             Encounter bog = new Encounter()
             {   
+                soundEffects = "101125__ironchicken__a0000013",
                 loot = ItemPopulator(),
                 difficultyToRun = 15,
                 pC = mainCharacter,
@@ -226,7 +233,8 @@ namespace DnDAdventureGame
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter mountain = new Encounter()
-            {   
+            {
+                soundEffects = "260567__felixblume__footsteps-in-the-snow-close-recording.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
@@ -238,13 +246,14 @@ namespace DnDAdventureGame
             };
             Encounter river = new Encounter()
             {
+                soundEffects = "584595__tosha73__mountain-river.wav",
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
                 isNoticed = true,
                 isTown = false,
                 locationDescription = "Approaching a river, you see the glistening water ahead. \nThe gentle sound of flowing water fills the air, and the earthy scent of the surrounding nature surrounds you. \nYou walk toward the riverbank, feeling the cool breeze and the soft, uneven ground underfoot. \nThe lush greenery and wildlife along the river's edge add to the tranquil atmosphere, making it a serene and inviting spot.",
-                fromAfar = "A wriver winding its way in the distance",
+                fromAfar = "A river winding its way in the distance",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
             temp.Add(cave);
@@ -272,13 +281,14 @@ namespace DnDAdventureGame
             Console.WriteLine(@" |_____/|_| |_|_____/  /_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___|  \_____|\__,_|_| |_| |_|\___|");
             Console.WriteLine("\n\n\n\n\n");
             Console.ForegroundColor = ConsoleColor.White;
+
             //plays background music
-            if (OperatingSystem.IsWindows())
-            {
+            //if (OperatingSystem.IsWindows())
+            //{
                 SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
                 player.Load();
                 player.PlayLooping();
-            }
+            //}
 
 
             Console.WriteLine("In this game you will adventure through the wilderness collecting gold.");
@@ -396,6 +406,12 @@ namespace DnDAdventureGame
             {
                 while (!currentEncounter.isTown)
                 {
+                    if (currentEncounter.soundEffects != "")
+                    {   
+                        player.SoundLocation = currentEncounter.soundEffects;
+                        player.Load();
+                        player.PlayLooping();
+                    }
                     currentEncounter.doWhat(mainCharacter);
                     List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
@@ -403,6 +419,9 @@ namespace DnDAdventureGame
                 bool adventuring = false;
                 while (!adventuring)
                 {
+                    player.SoundLocation = currentEncounter.soundEffects;
+                    player.Load();
+                    player.PlayLooping();
                     adventuring = currentEncounter.doTown(mainCharacter);
                 }
                 currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);

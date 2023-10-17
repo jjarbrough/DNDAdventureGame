@@ -2,6 +2,7 @@
 {
     internal class Encounter
     {
+        public string soundEffects { get; set; } = "";
         public bool isNoticed {  get; set; }
         public BasicCharacter pC {  get; set; }
         public int difficultyToRun { get; set; }
@@ -69,7 +70,7 @@
             bool correctInput = false;
             while (!correctInput)
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"{locationDescription}");
                 Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(10000);

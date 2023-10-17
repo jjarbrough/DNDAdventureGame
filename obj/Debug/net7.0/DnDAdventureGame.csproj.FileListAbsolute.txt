@@ -21,3 +21,11 @@ C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\runtimes\win\lib\n
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.csproj.AssemblyReference.cache
 C:\Users\jjarb\source\repos\DnDAdventureGame\obj\Debug\net7.0\DnDAdventureGame.csproj.CopyComplete
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\423119__ogsoundfx__medieval-city-sample.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\260567__felixblume__footsteps-in-the-snow-close-recording.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\246230__andreangelo__squelchy-mouth-cave-hq.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\101125__ironchicken__a0000013.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\378209__felixblume__the-sounds-of-the-meadow-gran-sabana-venezuela.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\489815__qedionium__field-recording-under-a-power-pilon-ambiance.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\531724__klankbeeld__forest-summer-roond-021-200619_0186.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\584595__tosha73__mountain-river.wav

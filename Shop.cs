@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Shop
+    public class Shop
     {
         public static BasicCharacter character {  get; set; }
         public static List<Items> shopInventory = new List<Items>();

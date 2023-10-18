@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal abstract class BasicCharacter
+    public abstract class BasicCharacter
     {
+        public int xp { get; set; }
         public bool hasPack { get; set; } = false;
         public int maxHealth {  get; set; } 
 
@@ -61,6 +62,7 @@ namespace DnDAdventureGame
             Console.WriteLine($"Your constitution score is: {conScore}. This increases your health and damage resistance");
         }
 
+        //add items to your pack
         public virtual void AddToPack(Items item, BasicCharacter character)
         {
             if (item is SackOfGold)
@@ -77,6 +79,58 @@ namespace DnDAdventureGame
             else
             {
                 Console.WriteLine("You have no where to put that");
+            }
+        }
+
+        public virtual void levelUp()
+        {
+            Console.WriteLine("With your current experience fighting monsters you become more effective! \nYou gain two attribute points of your choice.");
+            for (int i = 0; i < 2; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Which stat would you like to boost?\n s for strength, i for intelligence, d for dexterity, c for constitution, w for wisdom, h for charisma");
+                Console.ForegroundColor = ConsoleColor.White;
+                string input = Console.ReadLine();
+                bool correctInput = false;
+                while (!correctInput)
+                {
+                    switch (input)
+                    {
+                        case "s":
+                            strScore++;
+                            Console.WriteLine($"your strength is now {strScore}");
+                            correctInput = true;
+                            break;
+                        case "i":
+                            intScore++;
+                            Console.WriteLine($"your intelligence is now {intScore}");
+                            correctInput = true;
+                            break;
+                        case "d":
+                            dexScore++;
+                            Console.WriteLine($"your dexterity is now {dexScore}");
+                            correctInput = true;
+                            break;
+                        case "c":
+                            conScore++;
+                            Console.WriteLine($"your constitution is now {conScore}");
+                            correctInput = true;
+                            break;
+                        case "w":
+                            wisScore++;
+                            Console.WriteLine($"your wisdom is now {wisScore}");
+                            correctInput = true;
+                            break;
+                        case "h":
+                            chaScore++;
+                            Console.WriteLine($"your charisma is now {chaScore}");
+                            correctInput = true;
+                            break;
+                        default:
+                            Console.WriteLine("not an available option");
+                            break;
+                    }
+                }
             }
         }
     }

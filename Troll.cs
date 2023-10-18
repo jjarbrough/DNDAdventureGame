@@ -10,6 +10,7 @@ namespace DnDAdventureGame
     {
         public Troll()
         {
+            xp = 25;
             conScore = 1;
             Random rnd = new Random();
             gold = rnd.Next(25, 50);

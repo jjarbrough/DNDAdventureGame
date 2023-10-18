@@ -2,7 +2,7 @@
 
 namespace DnDAdventureGame
 {
-    internal class Encounter
+    public class Encounter
     {
         public string soundEffects { get; set; } = "";
         public bool isNoticed {  get; set; }
@@ -83,10 +83,21 @@ namespace DnDAdventureGame
 
                     Thread.Sleep(3000);
                 }
-                foreach (Enemy enemy in enemies)
+                if (enemies.Count() >0 && !enemies[0].isAlive)
                 {
-                    Console.WriteLine($"{enemy.name}");
-                    Thread.Sleep(1000);
+                    Console.WriteLine("You see the following corpses strewn around");
+                    foreach (Enemy badguy in enemies)
+                    {
+                        Console.WriteLine($"{badguy.name}");
+                    }
+                }
+                else
+                {
+                    foreach (Enemy enemy in enemies)
+                    {
+                        Console.WriteLine($"{enemy.name}");
+                        Thread.Sleep(1000);
+                    }
                 }
                 if (!isNoticed)
                 {

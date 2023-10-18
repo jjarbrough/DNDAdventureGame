@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class SackOfGold : Items
+    public class SackOfGold : Items
     {
         public override string name { get; set; }
         public override int healthAmount { get ; set ; }

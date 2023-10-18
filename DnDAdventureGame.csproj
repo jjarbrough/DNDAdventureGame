@@ -18,6 +18,9 @@
     <None Update="246230__andreangelo__squelchy-mouth-cave-hq.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="329324__aoristos__funeral-bell-cloche-funebre.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="378209__felixblume__the-sounds-of-the-meadow-gran-sabana-venezuela.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

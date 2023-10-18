@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Bear : Enemy
+    public class Bear : Enemy
     {
         public Bear()
         {
-            conScore = 3;
+            xp = 15;
+            conScore = 2;
             Random rnd = new Random();
             gold = rnd.Next(10, 30);
             armorScore = 4;

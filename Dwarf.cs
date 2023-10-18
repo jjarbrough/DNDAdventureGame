@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Dwarf : BasicCharacter
+    public class Dwarf : BasicCharacter
     {
         public Dwarf()
         {

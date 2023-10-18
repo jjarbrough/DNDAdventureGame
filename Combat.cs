@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Combat
+    public class Combat
     {
         public BasicCharacter pC { get; set; }
         public List<Enemy> badGuys { get; set; }
@@ -34,7 +34,7 @@ namespace DnDAdventureGame
                     sum += num;
                     if (!pC.isAlive)
                     {
-                        DeathScreen.deathScreen();
+                        DeathScreen.deathScreen(player);
                         break;
                     }
                     int num2 = pC.Attack();
@@ -47,6 +47,7 @@ namespace DnDAdventureGame
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
                         Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
                         pC.gold += pC.intScore;
+                        pC.xp += badGuy.xp;
                     }
                 }
             }
@@ -57,6 +58,12 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"You won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
+                if (pC.xp >= 50)
+                {
+                    Console.WriteLine("You have gained enough experience to level up!");
+                    pC.xp = pC.xp % 50;
+                    pC.levelUp();
+                }
             }
         }
 
@@ -81,6 +88,7 @@ namespace DnDAdventureGame
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
                         Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
                         pC.gold += pC.intScore;
+                        pC.xp += badGuy.xp;
                         break;
                     }
                     int num = badGuy.Attack();
@@ -89,7 +97,7 @@ namespace DnDAdventureGame
                     sum += num;
                     if (!pC.isAlive)
                     {
-                        DeathScreen.deathScreen();
+                        DeathScreen.deathScreen(player);
                         break;
                     }
                 }
@@ -101,6 +109,12 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
+                if (pC.xp >= 50)
+                {
+                    Console.WriteLine("You have gained enough experience to level up!");
+                    pC.xp = pC.xp % 50;
+                    pC.levelUp();
+                }
             }
         }
 
@@ -121,6 +135,7 @@ namespace DnDAdventureGame
                 Console.WriteLine($"You collect {badGuys[0].gold} gold off of the {badGuys[0].name}'s corpse");
                 Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
                 pC.gold += pC.intScore;
+                pC.xp += badGuys[0].xp;
             }
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
@@ -134,6 +149,7 @@ namespace DnDAdventureGame
                         Console.WriteLine($"You killed the {badGuy.name}!");
                         pC.gold += badGuy.gold;
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
+                        pC.xp += badGuy.xp;
                         break;
                     }
                     int num = badGuy.Attack();
@@ -142,7 +158,7 @@ namespace DnDAdventureGame
                     sum += num;
                     if (!pC.isAlive)
                     {
-                        DeathScreen.deathScreen();
+                        DeathScreen.deathScreen(player);
                         break;
                     }
                 }
@@ -154,6 +170,12 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
+                if (pC.xp >= 50)
+                {
+                    Console.WriteLine("You have gained enough experience to level up!");
+                    pC.xp = pC.xp % 50;
+                    pC.levelUp();
+                }
             }
         }
     }

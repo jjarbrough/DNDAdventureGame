@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal abstract class Enemy
+    public abstract class Enemy
     {
+        public int xp { get; set; }
         public int conScore { get; set; }
         public int armorScore {  get; set; }
         public int gold { get; set; }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Kobold : Enemy
+    public class Kobold : Enemy
     {
         public Kobold()
         {
+            xp = 3;
             conScore = 1;
             Random rnd = new Random();
             gold = rnd.Next(1, 10);

@@ -30,3 +30,4 @@ C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\676787__stevenmaer
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\135472__kvgarlic__summeropenfielddusk.wav
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\399744__inspectorj__ambience-florida-frogs-gathering-a.wav
 C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\543449__kostas17__howling-wind.wav
+C:\Users\jjarb\source\repos\DnDAdventureGame\bin\Debug\net7.0\329324__aoristos__funeral-bell-cloche-funebre.wav

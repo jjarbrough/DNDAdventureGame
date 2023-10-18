@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    internal class Goblin : Enemy
+    public class Goblin : Enemy
     {
         public Goblin()
         {
+            xp = 5;
             conScore = 0;
             armorScore = 0;
             Random rnd = new Random();

@@ -4,7 +4,7 @@ using System.Media;
 
 namespace DnDAdventureGame
 {
-    internal class Program
+    public class Program
     {
 
         //End screen
@@ -154,7 +154,7 @@ namespace DnDAdventureGame
         public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
             List<List<Enemy>> masterMonsterList = new List<List<Enemy>>();
-            for (int i = 0; i < 1000;i ++)
+            for (int i = 0; i < 1000; i++)
             {
                 List<Enemy> holder = Program.EnemyPopulator();
                 masterMonsterList.Add(holder);
@@ -164,14 +164,14 @@ namespace DnDAdventureGame
             Encounter cave = new Encounter()
             {
                 soundEffects = "246230__andreangelo__squelchy-mouth-cave-hq.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 12,
-                pC = mainCharacter,
-                isNoticed = false,
-                isTown = false,
-                locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
-                fromAfar = "A large Cave mouth looming wide",
-                enemies = GetRandomEnemies(masterMonsterList)
+            loot = ItemPopulator(),
+            difficultyToRun = 12,
+            pC = mainCharacter,
+            isNoticed = false,
+            isTown = false,
+            locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
+            fromAfar = "A large Cave mouth looming wide",
+            enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter meadow = new Encounter()
             {
@@ -412,7 +412,7 @@ namespace DnDAdventureGame
                         player.PlayLooping();
                     
                     currentEncounter.doWhat(mainCharacter, player);
-                    List<Encounter> possibleEnvironments = GetRandomEncounters(mainListOfEncounters);
+                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter));
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }
                 bool adventuring = false;

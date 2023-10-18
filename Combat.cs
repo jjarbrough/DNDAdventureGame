@@ -124,7 +124,7 @@ namespace DnDAdventureGame
             player.SoundLocation = "Wounded (1).wav";
             player.Load();
             player.PlayLooping();
-            Console.WriteLine("You have a ranged weapon so get a free attack");
+            Console.WriteLine("You are an elf so you get a free attack");
             int num2 = pC.Attack();
             Thread.Sleep(2000);
             badGuys[0].Damage(num2);

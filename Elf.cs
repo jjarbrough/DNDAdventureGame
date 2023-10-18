@@ -22,8 +22,8 @@ namespace DnDAdventureGame
             strScore = 0;
             wisScore = 3;
             intScore = 0;
-            weapon = "bow";
-            weaponDie = 8;
+            Bow bow = new Bow();
+            weapon = bow;
             Items healthPotion = new HealthPotion();
             Inventory.Add(healthPotion);
         }
@@ -32,9 +32,9 @@ namespace DnDAdventureGame
         public override int Attack()
         {
             Random rnd = new Random();
-            int damage = rnd.Next((1 + dexScore), (weaponDie + dexScore + 1));
+            int damage = rnd.Next((1 + dexScore), (weapon.weaponDie + dexScore + 1));
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"You shoot your {weapon} and do {damage} damage");
+            Console.WriteLine($"You shoot your {weapon.name} and do {damage} damage");
             Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }

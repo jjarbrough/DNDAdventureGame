@@ -151,6 +151,26 @@ namespace DnDAdventureGame
                 SackOfGold sack = new SackOfGold();
                 itemList.Add(sack);
             }
+            else if (count == 7)
+            {
+                FiveSword sword = new FiveSword();
+                itemList.Add(sword);
+            }
+            else if (count == 6)
+            {
+                Bow bow = new Bow();
+                itemList.Add(bow);
+            }
+            else if (count == 5)
+            {
+                BattleAxe battle = new BattleAxe();
+                itemList.Add(battle);
+            }
+            else if (count == 4)
+            {
+                Longsword longsword = new Longsword();
+                itemList.Add(longsword);
+            }
             return itemList;
         }
 
@@ -373,7 +393,7 @@ namespace DnDAdventureGame
                 mainCharacter.CheckInventory();
             }
             Continue();
-            Console.WriteLine($"By your feet you see a {mainCharacter.weapon}. Slowly you pick up the {mainCharacter.weapon}.");
+            Console.WriteLine($"By your feet you see a {mainCharacter.weapon.name}. Slowly you pick up the {mainCharacter.weapon.name}.");
             Console.WriteLine("Just in time! as you stand back up you hear a loud rustling in the branches to your left.");
 
             //first combat

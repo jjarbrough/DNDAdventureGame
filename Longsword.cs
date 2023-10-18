@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    public class FiveSword : Weapons
+    public class Longsword : Weapons
     {
-        public FiveSword()
+        public Longsword() 
         {
-            name = "Magical Longsword";
-            weaponDie = 15;
-            goldAmount = 100;
+            name = "Longsword";
+            weaponDie = 10;
+            goldAmount = 25;
         }
     }
 }

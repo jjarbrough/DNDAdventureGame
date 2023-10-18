@@ -22,8 +22,8 @@ namespace DnDAdventureGame
             strScore = 3;
             wisScore = 2;
             intScore = 0;
-            weapon = "BattleAxe";
-            weaponDie = 12;
+            BattleAxe axe = new BattleAxe();
+            weapon = axe;
             Items healthPotion = new HealthPotion();
             Inventory.Add(healthPotion);
         }
@@ -33,9 +33,9 @@ namespace DnDAdventureGame
         public override int Attack()
         {
             Random rnd = new Random();
-            int damage = rnd.Next((1 + strScore), (weaponDie + strScore + 1));
+            int damage = rnd.Next((1 + strScore), (weapon.weaponDie + strScore + 1));
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"You swing your {weapon} and do {damage} damage");
+            Console.WriteLine($"You swing your {weapon.name} and do {damage} damage");
             Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }

@@ -26,8 +26,7 @@ namespace DnDAdventureGame
         public int conScore { get; set; } //bonus to damage reduction and bonus to health
         public int wisScore { get; set; } //bonus to percieving things around you i:e hidden loot or surprises
         public bool isAlive { get; set; }
-        public string weapon { get; set; }
-        public int weaponDie { get; set; }
+        public Weapons weapon { get; set; }
 
 
         //do damage

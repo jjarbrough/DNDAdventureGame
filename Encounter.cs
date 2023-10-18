@@ -242,11 +242,22 @@ namespace DnDAdventureGame
             }
             else
             {
-                foreach (var Items in loot)
+                foreach (var items in loot)
                 {
-                    Console.WriteLine($"{Items.name}");
+                    Console.WriteLine($"{items.name}");
                     Thread.Sleep(2000);
-                    pC.AddToPack(Items,character);
+                    if (items is FiveSword)
+                    {
+                        Console.WriteLine("Finding this magical sword you immediately equip it");
+                        character.AddToPack(character.weapon, character);
+                        character.weapon = new FiveSword();
+                        character.Inventory.Remove(items);
+                    }
+                    pC.AddToPack(items, character);
+                    if (items is FiveSword && (!(character.weapon is FiveSword)))
+                    {
+                        character.Inventory.Remove(items);
+                    }
                 }
                 Console.WriteLine("You have added these items to your inventory");
             }

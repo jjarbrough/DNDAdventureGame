@@ -11,7 +11,7 @@ namespace DnDAdventureGame
         public Dwarf()
         {
             armorScore = 4;
-            gold = 50;
+            gold = 0;
             isAlive = true;
             name = "Rangrim";
             health = 80;

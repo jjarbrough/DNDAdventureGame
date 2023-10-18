@@ -30,6 +30,9 @@
     <None Update="423119__ogsoundfx__medieval-city-sample.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="466133__humanoide9000__victory-fanfare.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="531724__klankbeeld__forest-summer-roond-021-200619_0186.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

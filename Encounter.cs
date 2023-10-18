@@ -34,7 +34,7 @@ namespace DnDAdventureGame
         }
 
         //the loop of options while in town
-        public bool doTown(BasicCharacter character)
+        public bool doTown(BasicCharacter character, SoundPlayer player)
         {
             Console.WriteLine("What do you want to do?");
             Console.WriteLine($"you have {character.gold} gold");
@@ -45,7 +45,7 @@ namespace DnDAdventureGame
             switch (input) 
             {
                 case "r":
-                    Program.EndGameScreen(character);
+                    Program.EndGameScreen(character, player);
                     return false;
                 case "l":
                     Console.WriteLine("You spend the night in an inn, this costs you 15 gold");

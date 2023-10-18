@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Remoting;
 using System.Security.Cryptography.X509Certificates;
 using System.Media;
+using System.Numerics;
 
 namespace DnDAdventureGame
 {
@@ -8,7 +9,7 @@ namespace DnDAdventureGame
     {
 
         //End screen
-        public static void EndGameScreen(BasicCharacter character)
+        public static void EndGameScreen(BasicCharacter character, SoundPlayer player)
         {
             Console.WriteLine(@" __     ______  _    _    _____ _    _ _______      _________      ________ _____  _ _ ");
             Thread.Sleep(500);
@@ -41,6 +42,9 @@ namespace DnDAdventureGame
             }
             else
             {
+                player.SoundLocation = "466133__humanoide9000__victory-fanfare.wav";
+                player.Load();
+                player.PlayLooping();
                 Console.WriteLine("You made your fortune adventuring, you have bought your way into nobility retiring as a pampered lord");
             }
             Thread.Sleep (15000);
@@ -164,14 +168,14 @@ namespace DnDAdventureGame
             Encounter cave = new Encounter()
             {
                 soundEffects = "246230__andreangelo__squelchy-mouth-cave-hq.wav",
-            loot = ItemPopulator(),
-            difficultyToRun = 12,
-            pC = mainCharacter,
-            isNoticed = false,
-            isTown = false,
-            locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
-            fromAfar = "A large Cave mouth looming wide",
-            enemies = GetRandomEnemies(masterMonsterList)
+                loot = ItemPopulator(),
+                difficultyToRun = 12,
+                pC = mainCharacter,
+                isNoticed = false,
+                isTown = false,
+                locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
+                fromAfar = "A large Cave mouth looming wide",
+                enemies = GetRandomEnemies(masterMonsterList)
             };
             Encounter meadow = new Encounter()
             {
@@ -421,7 +425,7 @@ namespace DnDAdventureGame
                     player.SoundLocation = currentEncounter.soundEffects;
                     player.Load();
                     player.PlayLooping();
-                    adventuring = currentEncounter.doTown(mainCharacter);
+                    adventuring = currentEncounter.doTown(mainCharacter, player);
                 }
                 currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);
             }

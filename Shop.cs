@@ -78,7 +78,7 @@ namespace DnDAdventureGame
             Console.WriteLine($"The shopkeeper has the following items for sale:");
             for (int i = 0; i < shopInventory.Count(); i++)
             {
-                Console.WriteLine($"{shopInventory[i].name} for ({shopInventory[i].goldAmount - (character.chaScore * 3)})");
+                Console.WriteLine($"{shopInventory[i].name} for ({2 * (shopInventory[i].goldAmount - (character.chaScore * 3))})");
             }
             bool finished = false;
             while (!finished)
@@ -93,7 +93,7 @@ namespace DnDAdventureGame
                         if (character.gold >= healthPotion.goldAmount)
                         {
                             character.AddToPack(healthPotion, pC);
-                            character.gold -= (healthPotion.goldAmount - (character.chaScore * 3));
+                            character.gold -= (healthPotion.goldAmount - (character.chaScore * 3) * 2);
                         }
                         else
                         {
@@ -104,7 +104,7 @@ namespace DnDAdventureGame
                         if (character.gold >= statBoost.goldAmount)
                         {
                             atrributeIncrease(pC);
-                            character.gold -= (statBoost.goldAmount - (character.chaScore * 3));
+                            character.gold -= (statBoost.goldAmount - (character.chaScore * 3) * 2);
                             Console.WriteLine("You feel more powerful");
                         }
                         else
@@ -115,7 +115,7 @@ namespace DnDAdventureGame
                         case "b":
                         if (character.gold >= pack.goldAmount)
                         {
-                            character.gold -= (pack.goldAmount - (character.chaScore * 3));
+                            character.gold -= (pack.goldAmount - (character.chaScore * 3) * 2);
                             Console.WriteLine("You now have a pack to hold items you find");
                             character.hasPack = true;
                         }

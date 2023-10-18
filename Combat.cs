@@ -58,10 +58,10 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"You won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
-                if (pC.xp >= 50)
+                if (pC.xp >= 75)
                 {
                     Console.WriteLine("You have gained enough experience to level up!");
-                    pC.xp = pC.xp % 50;
+                    pC.xp = pC.xp % 75;
                     pC.levelUp();
                 }
             }
@@ -109,10 +109,10 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
-                if (pC.xp >= 50)
+                if (pC.xp >= 75)
                 {
                     Console.WriteLine("You have gained enough experience to level up!");
-                    pC.xp = pC.xp % 50;
+                    pC.xp = pC.xp % 75;
                     pC.levelUp();
                 }
             }
@@ -170,10 +170,10 @@ namespace DnDAdventureGame
                 player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
-                if (pC.xp >= 50)
+                if (pC.xp >= 75)
                 {
                     Console.WriteLine("You have gained enough experience to level up!");
-                    pC.xp = pC.xp % 50;
+                    pC.xp = pC.xp % 75;
                     pC.levelUp();
                 }
             }

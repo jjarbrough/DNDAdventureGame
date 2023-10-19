@@ -14,6 +14,8 @@ namespace DnDAdventureGame
         public bool hasPack { get; set; } = false;
         public int maxHealth {  get; set; } 
 
+        public List<Items> weaponInventory = new List<Items>();
+
         public List<Items> Inventory = new List<Items>();   
         public int armorScore { get; set; }
         public int gold { get; set; }
@@ -48,6 +50,18 @@ namespace DnDAdventureGame
             }
             Console.WriteLine($"And you currently have {gold} gold");
 
+        }
+
+        //Updates the weapon list
+        public virtual void GetWeaponList()
+        {
+            foreach (Items item in Inventory)
+            {
+                if (item is Weapons)
+                {
+                    weaponInventory.Add(weapon);
+                }
+            }
         }
 
         //see what your attributes are

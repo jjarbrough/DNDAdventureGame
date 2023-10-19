@@ -6,40 +6,40 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    public class Elf : BasicCharacter
+    public class Human : BasicCharacter
     {
-        public Elf()
+        public Human()
         {
             armorScore = 0;
-            gold = 0;
+            gold = 15;
             isAlive = true;
-            name = "Imadril";
-            health = 50;
-            maxHealth = 50;
-            chaScore = 1;
-            conScore = 0;
-            dexScore = 3;
+            name = "Geoffrey";
+            health = 60;
+            maxHealth = 60;
+            chaScore = 3;
+            conScore = 1;
+            dexScore = 0;
             strScore = 0;
-            wisScore = 3;
-            intScore = 0;
-            Bow bow = new Bow();
-            weapon = bow;
+            wisScore = 0;
+            intScore = 3;
+            Longsword longsword = new Longsword();
+            weapon = longsword;
             Items healthPotion = new HealthPotion();
             Inventory.Add(healthPotion);
         }
 
-        //Do damage
+        //attacking
         public override int Attack()
         {
             Random rnd = new Random();
-            int damage = rnd.Next((1 + dexScore), (weapon.weaponDie + dexScore + 1));
+            int damage = rnd.Next((1 + strScore), (weapon.weaponDie + strScore + 1));
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"You shoot your {weapon.name} and do {damage} damage");
+            Console.WriteLine($"You swing your {weapon.name} and do {damage} damage");
             Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }
 
-        //take damage and check if still alive
+        //taking damage and checking if still alive
         public override void Damage(int damage)
         {
             int totalDamage = damage - conScore;
@@ -58,11 +58,11 @@ namespace DnDAdventureGame
             }
         }
 
-        //use health potin and heal
+        //check potions in inventory and heal if there are potions
         public override void Heal()
         {
             int numberOfHealthPotions = 0;
-            foreach (HealthPotion thing in Inventory)
+            foreach (Items thing in Inventory)
             {
                 if (thing is HealthPotion)
                 {
@@ -77,9 +77,9 @@ namespace DnDAdventureGame
                     if (things is HealthPotion)
                     {
                         Inventory.Remove(things);
-                        if (health + things.healthAmount >= 50)
+                        if (health + things.healthAmount >= 60)
                         {
-                            health = 50;
+                            health = 60;
                             break;
                         }
                         else
@@ -95,7 +95,7 @@ namespace DnDAdventureGame
             else
             {
                 Console.WriteLine("You can't heal, you don't have any health potions");
-            }    
+            }
             Console.WriteLine($"Your health is now {health}");
         }
     }

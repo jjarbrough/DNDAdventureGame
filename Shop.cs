@@ -61,31 +61,6 @@ namespace DnDAdventureGame
             }
         }
 
-        public void SellOptions(BasicCharacter pC)
-        {
-            foreach (Items item in pC.Inventory)
-            {
-                Console.ForegroundColor= ConsoleColor.Blue;
-                Console.WriteLine($"Do you want to sell {item.name} for {item.goldAmount} gold? yes/no");
-                Console.ForegroundColor = ConsoleColor.White;
-                string response = Console.ReadLine();
-                if (response == "yes")
-                {
-                    pC.gold += item.goldAmount;
-                    pC.Inventory.Remove(item);
-                }
-                else if (response == "no")
-                {
-                    Console.WriteLine($"You are keeping {item.name}");
-                }
-                else
-                {
-                    Console.WriteLine("The shopkeeper didnt understand you so you keep the item");
-                }
-
-            }
-        }
-
         //shop options and purchasing
         public Shop(BasicCharacter pC)
         {
@@ -153,12 +128,12 @@ namespace DnDAdventureGame
                         for(int i = (pC.Inventory.Count()-1); i >= 0; i--)
                         {
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine($"Do you want to sell {pC.Inventory[i].name} for {pC.Inventory[i].goldAmount} gold? yes/no");
+                            Console.WriteLine($"Do you want to sell {pC.Inventory[i].name} for {(pC.Inventory[i].goldAmount + (3*character.chaScore))} gold? yes/no");
                             Console.ForegroundColor = ConsoleColor.White;
                             string response = Console.ReadLine();
                             if (response == "yes")
                             {
-                                pC.gold += pC.Inventory[i].goldAmount;
+                                pC.gold += (pC.Inventory[i].goldAmount + (3 * character.chaScore));
                                 pC.Inventory.Remove(pC.Inventory[i]);
                             }
                             else if (response == "no")

@@ -1,10 +1,11 @@
 ﻿using System.Media;
+using System.Runtime.InteropServices;
 
 namespace DnDAdventureGame
 {
     public class Encounter
     {
-        public string soundEffects { get; set; } = "";
+        public string soundEffects { get; set; }
         public bool isNoticed {  get; set; }
         public BasicCharacter pC {  get; set; }
         public int difficultyToRun { get; set; }
@@ -113,13 +114,13 @@ namespace DnDAdventureGame
                 if (enemies.Count() > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("f for fight, r for run or u for use item");
+                    Console.WriteLine("f for fight, r for run, c for change equipment, or u for use item");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("f for forage, r for run or u for use item");
+                    Console.WriteLine("f for forage, r for run, c for change equipment, or u for use item");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 string input = Console.ReadLine();
@@ -139,6 +140,30 @@ namespace DnDAdventureGame
                         Thread.Sleep(3000);
                         Stay(character, player);
                     }
+                }
+                else if (input.Equals("c"))
+                {
+                    correctInput = true;
+                    pC.GetWeaponList();
+                    if (pC.weaponInventory.Count > 0)
+                    {
+                        for (int i = pC.weaponInventory.Count() - 1; i >= 0; i--)
+                        {
+                            Console.WriteLine($"Would you like to equip {pC.weaponInventory[i].name}? y/n");
+                            string reponse = Console.ReadLine();
+                            if (reponse == "y")
+                            {
+                                pC.GetWeaponList();
+                                pC.AddToPack(pC.weapon, pC);
+                                pC.weapon = (Weapons)pC.weaponInventory[i];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have no weapons to switch between");
+                    }
+                    Stay(pC, player);
                 }
                 else if (input.Equals("u"))
                 {
@@ -246,18 +271,7 @@ namespace DnDAdventureGame
                 {
                     Console.WriteLine($"{items.name}");
                     Thread.Sleep(2000);
-                    if (items is FiveSword)
-                    {
-                        Console.WriteLine("Finding this magical sword you immediately equip it");
-                        character.AddToPack(character.weapon, character);
-                        character.weapon = new FiveSword();
-                        character.Inventory.Remove(items);
-                    }
                     pC.AddToPack(items, character);
-                    if (items is FiveSword && (!(character.weapon is FiveSword)))
-                    {
-                        character.Inventory.Remove(items);
-                    }
                 }
                 Console.WriteLine("You have added these items to your inventory");
             }

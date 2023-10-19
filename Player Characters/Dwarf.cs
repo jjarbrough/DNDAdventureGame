@@ -64,7 +64,7 @@ namespace DnDAdventureGame
         {
             //figure out number of health potions
             int numberOfHealthPotions = 0;
-            foreach (HealthPotion thing in Inventory)
+            foreach (Items thing in Inventory)
             {
                 if (thing is HealthPotion)
                 {

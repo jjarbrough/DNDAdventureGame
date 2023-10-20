@@ -174,6 +174,20 @@ namespace DnDAdventureGame
             return itemList;
         }
 
+        //making the spotted by enemies a 50/50 chance
+        public static bool isSpotted()
+        {
+            int count = DieRoller(2);
+            if (count == 1) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //populating the lists
         public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
         {
@@ -191,7 +205,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 12,
                 pC = mainCharacter,
-                isNoticed = false,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
                 fromAfar = "A large Cave mouth looming wide",
@@ -203,7 +217,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
-                isNoticed = true,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Walking into a meadow, you step into a vast expanse of open space. \nSunlight bathes the area, warming your skin and brightening the surroundings. \nThe ground is covered with soft, knee-high grasses and wildflowers that sway gently in the breeze. \nThe air is filled with the scent of earth and blossoms. \nIn the distance, you might hear the chirping of birds or the buzzing of insects. \nIt's a peaceful and open landscape, inviting you to take in the natural beauty all around.",
                 fromAfar = "A welcoming meadow, dotted with flowers and small plants",
@@ -215,7 +229,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 5,
                 pC = mainCharacter,
-                isNoticed = true,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Walking into a field, you enter a spacious landscape with ground covered by short grasses and crops.\n Sunlight bathes the area, and the surroundings are open with a distant horizon or trees in the periphery. \nThe air carries the earthy scent of vegetation, and you can hear the rustling of leaves, \nthe chirping of birds, and the gentle swaying of plants in the wind.",
                 fromAfar = "A field with rolling hills",
@@ -227,7 +241,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 10,
                 pC = mainCharacter,
-                isNoticed = true,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Walking into a forest, you step into a dense and verdant environment. \nThe ground is covered with fallen leaves, twigs, and soft soil. \nTall trees rise around you, their branches forming a natural canopy overhead, dimming the light. \nThe air is cool, and the scent of earth and moss surrounds you. \nThe forest is alive with the chirping of birds, rustling of small animals, and the occasional crackling of branches. \nIt's a serene and mysterious realm, inviting you to explore its depths.",
                 fromAfar = "A Dense and gloomy forest",
@@ -238,7 +252,7 @@ namespace DnDAdventureGame
                 soundEffects = "423119__ogsoundfx__medieval-city-sample.wav",
                 difficultyToRun = 12,
                 pC = mainCharacter,
-                isNoticed = true,
+                isNoticed = false,
                 isTown = true,
                 locationDescription = "Walking into town narrow cobblestone streets wind between centuries-old stone buildings. \nOverhanging timber-framed houses line the lanes, and the air is filled with the scent of opportunity. \nThe town bustles with activity as villagers go about their daily routines. \nYou hear the clip-clop of horses' hooves, merchants haggling at market stalls, and the distant chime of a church bell.",
                 fromAfar = "A town peeking over the hills in the distance",
@@ -250,7 +264,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 15,
                 pC = mainCharacter,
-                isNoticed = false,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "As you step into the bog, the ground beneath your feet gives way, sinking into a squelchy, muddy morass. \nThe air is thick with a damp, earthy aroma, and the dense fog conceals much of the landscape. \nWaterlogged plants with twisted, moss-covered branches reach out from the murky waters, and the eerie chorus of croaking frogs and buzzing insects fills the air. \nYour every step is accompanied by a sucking sound as your boots struggle to break free from the mire, \nmaking each movement a slow and cautious endeavor in this eerie, desolate wetland.",
                 fromAfar = "What appears to be wetlands covered in fog",
@@ -262,7 +276,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
-                isNoticed = false,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Walking up to a mountain is a gradual journey of ascending terrain. \nAs you approach the mountain, the landscape becomes steeper, and the air grows crisper. \nThe path typically leads through forests, meadows, or rocky trails, with each step offering a closer view of the majestic peak ahead. \nThe mountain looms larger and more imposing as you get nearer, and the anticipation of the climb ahead intensifies with each stride.",
                 fromAfar = "majestic mountain peaks disappearing into the clouds",
@@ -274,7 +288,7 @@ namespace DnDAdventureGame
                 loot = ItemPopulator(),
                 difficultyToRun = 6,
                 pC = mainCharacter,
-                isNoticed = true,
+                isNoticed = isSpotted(),
                 isTown = false,
                 locationDescription = "Approaching a river, you see the glistening water ahead. \nThe gentle sound of flowing water fills the air, and the earthy scent of the surrounding nature surrounds you. \nYou walk toward the riverbank, feeling the cool breeze and the soft, uneven ground underfoot. \nThe lush greenery and wildlife along the river's edge add to the tranquil atmosphere, making it a serene and inviting spot.",
                 fromAfar = "A river winding its way in the distance",

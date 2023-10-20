@@ -70,7 +70,7 @@ namespace DnDAdventureGame
         {
             Console.WriteLine($"Your strength score is: {strScore}. This increases your damage if you are a dwarf or human");
             Console.WriteLine($"Your intelligence score is: {intScore}. This increases the amount of valuable artefacts you can find on enemies");
-            Console.WriteLine($"Your dexterity score is: {dexScore}. This increases the Elves damage as well as increasing your chances to get away");
+            Console.WriteLine($"Your dexterity score is: {dexScore}. This increases the Elves damage as well as increasing your chances to get away and to dodge attacks");
             Console.WriteLine($"Your charisma score is: {chaScore}. This decreases the amount of gold upgrades cost in town");
             Console.WriteLine($"Your wisdom score is: {wisScore}. This increases your chances of finding treasures in the environment");
             Console.WriteLine($"Your constitution score is: {conScore}. This increases your health and damage resistance");

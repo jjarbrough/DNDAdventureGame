@@ -67,11 +67,13 @@ namespace DnDAdventureGame
                 Console.WriteLine($"Your health is now {pC.health}");
                 if (pC.xp >= 75)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You have gained enough experience to level up!");
                     pC.xp = pC.xp % 75;
                     pC.levelUp();
                     pC.level++;
                     Console.WriteLine($"You are now Level {pC.level}");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
         }
@@ -206,9 +208,10 @@ namespace DnDAdventureGame
             }
         }
 
+        //checks to see if an enemies attack hits
         public bool TryHit()
         {
-            if (pC.dexScore + Program.DieRoller(20) >= 13)
+            if (pC.dexScore + Program.DieRoller(20) >= 15)
             {
                 return true;
             }

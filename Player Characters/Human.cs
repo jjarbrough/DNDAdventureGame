@@ -18,10 +18,10 @@ namespace DnDAdventureGame
             maxHealth = 60;
             chaScore = 3;
             conScore = 1;
-            dexScore = 0;
-            strScore = 0;
+            dexScore = 1;
+            strScore = 1;
             wisScore = 0;
-            intScore = 3;
+            intScore = 2;
             Longsword longsword = new Longsword();
             weapon = longsword;
             Items healthPotion = new HealthPotion();

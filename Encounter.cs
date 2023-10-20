@@ -275,7 +275,9 @@ namespace DnDAdventureGame
             {
                 foreach (var items in loot)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine($"{items.name}");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Thread.Sleep(2000);
                     pC.AddToPack(items, character);
                     if (items is Weapons)
@@ -287,7 +289,6 @@ namespace DnDAdventureGame
                         pC.Inventory.Remove(items);
                     }
                 }
-                Console.WriteLine("You have added these items to your inventory");
             }
         }
 

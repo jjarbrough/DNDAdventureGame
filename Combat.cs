@@ -28,10 +28,17 @@ namespace DnDAdventureGame
             {
                 while (pC.isAlive && badGuy.isAlive)
                 {
+                    if (TryHit())
+                    {
                     int num = badGuy.Attack();
                     Thread.Sleep(2000);
                     pC.Damage(num);
                     sum += num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You dodged the attack!");
+                    }
                     if (!pC.isAlive)
                     {
                         DeathScreen.deathScreen(player);
@@ -63,6 +70,8 @@ namespace DnDAdventureGame
                     Console.WriteLine("You have gained enough experience to level up!");
                     pC.xp = pC.xp % 75;
                     pC.levelUp();
+                    pC.level++;
+                    Console.WriteLine($"You are now Level {pC.level}");
                 }
             }
         }
@@ -91,10 +100,17 @@ namespace DnDAdventureGame
                         pC.xp += badGuy.xp;
                         break;
                     }
+                    if (TryHit())
+                    {
                     int num = badGuy.Attack();
                     Thread.Sleep(2000);
                     pC.Damage(num);
                     sum += num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You dodged the attack!");
+                    }
                     if (!pC.isAlive)
                     {
                         DeathScreen.deathScreen(player);
@@ -114,6 +130,8 @@ namespace DnDAdventureGame
                     Console.WriteLine("You have gained enough experience to level up!");
                     pC.xp = pC.xp % 75;
                     pC.levelUp();
+                    pC.level++;
+                    Console.WriteLine($"You are now Level {pC.level}");
                 }
             }
         }
@@ -152,10 +170,17 @@ namespace DnDAdventureGame
                         pC.xp += badGuy.xp;
                         break;
                     }
+                    if(TryHit())
+                    {
                     int num = badGuy.Attack();
                     Thread.Sleep(2000);
                     pC.Damage(num);
                     sum += num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You dodged the attack!");
+                    }
                     if (!pC.isAlive)
                     {
                         DeathScreen.deathScreen(player);
@@ -175,7 +200,21 @@ namespace DnDAdventureGame
                     Console.WriteLine("You have gained enough experience to level up!");
                     pC.xp = pC.xp % 75;
                     pC.levelUp();
+                    pC.level++;
+                    Console.WriteLine($"You are now Level {pC.level}");
                 }
+            }
+        }
+
+        public bool TryHit()
+        {
+            if (pC.dexScore + Program.DieRoller(20) >= 13)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

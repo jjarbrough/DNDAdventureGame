@@ -5,6 +5,7 @@ namespace DnDAdventureGame
 {
     public class Encounter
     {
+        public string art { get; set; } = "";
         public string soundEffects { get; set; }
         public bool isNoticed {  get; set; }
         public BasicCharacter pC {  get; set; }
@@ -73,6 +74,10 @@ namespace DnDAdventureGame
             bool correctInput = false;
             while (!correctInput)
             {
+                if (art != "")
+                {
+                Console.WriteLine($"{ art }");
+                }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"{locationDescription}");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -276,6 +281,10 @@ namespace DnDAdventureGame
                     if (items is Weapons)
                     {
                         pC.weaponInventory.Add((Weapons)items);
+                    }
+                    if (items is SackOfGold)
+                    {
+                        pC.Inventory.Remove(items);
                     }
                 }
                 Console.WriteLine("You have added these items to your inventory");

@@ -18,7 +18,7 @@ namespace DnDAdventureGame
             maxHealth = 80;
             chaScore = -1;
             conScore = 3;
-            dexScore = 0;
+            dexScore = -2;
             strScore = 3;
             wisScore = 2;
             intScore = 0;

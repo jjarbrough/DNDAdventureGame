@@ -26,6 +26,7 @@ namespace DnDAdventureGame
             weapon = longsword;
             Items healthPotion = new HealthPotion();
             Inventory.Add(healthPotion);
+            magicCharges = intScore;
         }
 
         //attacking

@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Media;
 using System.Numerics;
+using DnDAdventureGame.Enemys;
 
 namespace DnDAdventureGame
 {
@@ -198,6 +199,9 @@ namespace DnDAdventureGame
                 masterMonsterList.Add(holder);
 
             }
+            Dragon dragon = new Dragon();
+            List<Enemy> dragonList = new List<Enemy>();
+            dragonList.Add(dragon);
             List<Encounter> temp = new List<Encounter>();
             Encounter cave = new Encounter()
             {
@@ -294,6 +298,35 @@ namespace DnDAdventureGame
                 fromAfar = "A river winding its way in the distance",
                 enemies = GetRandomEnemies(masterMonsterList)
             };
+            Encounter volcano = new Encounter()
+            {
+                art = @"
+                 ___====-_  _-====___
+           _--^^^#####//      \\#####^^^--_
+        _-^##########// (    ) \\##########^-_
+       -############//  |\^^/|  \\############-
+     _/############//   (@::@)   \\############\_
+    /#############((     \\//     ))#############\
+   -###############\\    (oo)    //###############-
+  -#################\\  / VV \  //#################-
+ -###################\\/      \//###################-
+_#/|##########/\######(   /\   )######/\##########|\#_
+|/ |#/\#/\#/\/  \#/\##\  |  |  /##/\#/  \/\#/\#/\#| \|
+`  |/  V  V  `   V  \#\| |  | |/#/  V   '  V  V  \|  '
+   `   `  `      `   / | |  | | \   '      '  '   '
+                    (  | |  | |  )
+                   __\ | |  | | /__
+                  (vvv(VVV)(VVV)vvv)",
+                soundEffects = "415608__rtb45__mud-volcano-field-salton-sea.wav",
+                loot = ItemPopulator(),
+                difficultyToRun = 20,
+                pC = mainCharacter,
+                isNoticed = isSpotted(),
+                isTown = false,
+                locationDescription = "Approaching a volcano involves a noticeable shift in landscape and temperature, with the scent of sulfur in the air. \nThe terrain becomes rugged and barren, and you hear the sounds of volcanic activity. \nReaching the summit offers a view of the crater and its billowing smoke, a striking reminder of the Earth's power. \nAt the center of this volcano you see a dragon curled up on a hoard of gold",
+                fromAfar = "A fiery volcano with a dragon circling overhead (WARNING: BOSS LEVEL)",
+                enemies = dragonList
+            };
             temp.Add(cave);
             temp.Add(meadow);
             temp.Add(field);
@@ -302,6 +335,7 @@ namespace DnDAdventureGame
             temp.Add(bog);
             temp.Add(mountain);
             temp.Add(river);
+            temp.Add(volcano);
             return temp;
         }
 

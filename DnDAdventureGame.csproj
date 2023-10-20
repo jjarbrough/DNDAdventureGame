@@ -27,6 +27,9 @@
     <None Update="399744__inspectorj__ambience-florida-frogs-gathering-a.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="415608__rtb45__mud-volcano-field-salton-sea.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="423119__ogsoundfx__medieval-city-sample.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

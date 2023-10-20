@@ -26,6 +26,7 @@ namespace DnDAdventureGame
             weapon = bow;
             Items healthPotion = new HealthPotion();
             Inventory.Add(healthPotion);
+            magicCharges = intScore;
         }
 
         //Do damage

@@ -10,6 +10,7 @@ namespace DnDAdventureGame
 {
     public abstract class BasicCharacter
     {
+        public int magicCharges {  get; set; }
         public int level { get; set; } = 1;
         public int xp { get; set; }
         public bool hasPack { get; set; } = false;

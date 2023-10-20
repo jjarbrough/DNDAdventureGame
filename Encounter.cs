@@ -51,9 +51,10 @@ namespace DnDAdventureGame
                     return false;
                 case "l":
                     Console.WriteLine("You spend the night in an inn, this costs you 15 gold");
-                    Console.WriteLine("You waken feeling refreshed, and your health has been returned to maximum");
+                    Console.WriteLine("You waken feeling refreshed. Your health and magic charges have been returned to maximum");
                     character.health = character.maxHealth;
                     character.gold -= 15;
+                    character.magicCharges = character.intScore;
                     return false;
                 case "a":
                     Console.WriteLine("Eager to get back to adventuring you head out of town");
@@ -119,13 +120,13 @@ namespace DnDAdventureGame
                 if (enemies.Count() > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("f for fight, r for run, c for change equipment, or u for use item");
+                    Console.WriteLine("f for fight, r for run, c for change equipment, m for magic, or u for use item");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("f for forage, r for run, c for change equipment, or u for use item");
+                    Console.WriteLine("f for forage, r for run, c for change equipment, m for magic, or u for use item");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 string input = Console.ReadLine();
@@ -170,6 +171,32 @@ namespace DnDAdventureGame
                         Console.WriteLine("You have no weapons to switch between");
                     }
                     Stay(pC, player);
+                }
+                else if (input.Equals("m"))
+                {
+                    correctInput = true;
+                    if (pC.magicCharges > 0)
+                    {
+                        foreach(Enemy enemy in enemies)
+                        {
+                            enemy.isAlive = false;
+                        }
+                        Console.WriteLine("You throw a fireball and kill all enemies in the area, also destroying their loot");
+                        pC.magicCharges--;
+                        int xpSum = 0;
+                        foreach(Enemy enemy in enemies)
+                        {
+                            xpSum += enemy.xp;
+                        }
+                        Console.WriteLine($"you gained {xpSum} xp");
+                        SurvivedEncounter(pC);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You reach for the magic, but cannot find it. Try long resting or upping your intelligence.");
+                        Thread.Sleep(3000);
+                        Stay(pC, player);
+                    }
                 }
                 else if (input.Equals("u"))
                 {

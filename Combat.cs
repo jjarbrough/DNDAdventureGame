@@ -133,6 +133,7 @@ namespace DnDAdventureGame
                     pC.xp = pC.xp % 75;
                     pC.levelUp();
                     pC.level++;
+                    pC.magicCharges = pC.intScore;
                     Console.WriteLine($"You are now Level {pC.level}");
                 }
             }

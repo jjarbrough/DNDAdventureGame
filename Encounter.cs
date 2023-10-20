@@ -144,18 +144,19 @@ namespace DnDAdventureGame
                 else if (input.Equals("c"))
                 {
                     correctInput = true;
-                    pC.GetWeaponList();
                     if (pC.weaponInventory.Count > 0)
                     {
+                       // pC.GetWeaponList();
                         for (int i = pC.weaponInventory.Count() - 1; i >= 0; i--)
                         {
                             Console.WriteLine($"Would you like to equip {pC.weaponInventory[i].name}? y/n");
                             string reponse = Console.ReadLine();
                             if (reponse == "y")
                             {
-                                pC.GetWeaponList();
+                                pC.weaponInventory.Add(pC.weapon);
                                 pC.AddToPack(pC.weapon, pC);
-                                pC.weapon = (Weapons)pC.weaponInventory[i];
+                                pC.weapon = pC.weaponInventory[i];
+                                pC.weaponInventory.RemoveAt(i);
                             }
                         }
                     }
@@ -272,6 +273,10 @@ namespace DnDAdventureGame
                     Console.WriteLine($"{items.name}");
                     Thread.Sleep(2000);
                     pC.AddToPack(items, character);
+                    if (items is Weapons)
+                    {
+                        pC.weaponInventory.Add((Weapons)items);
+                    }
                 }
                 Console.WriteLine("You have added these items to your inventory");
             }

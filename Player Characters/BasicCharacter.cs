@@ -14,7 +14,7 @@ namespace DnDAdventureGame
         public bool hasPack { get; set; } = false;
         public int maxHealth {  get; set; } 
 
-        public List<Items> weaponInventory = new List<Items>();
+        public List<Weapons> weaponInventory = new List<Weapons>();
 
         public List<Items> Inventory = new List<Items>();   
         public int armorScore { get; set; }

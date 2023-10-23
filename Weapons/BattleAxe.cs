@@ -11,7 +11,7 @@ namespace DnDAdventureGame
         public BattleAxe()
         {
             name = "BattleAxe";
-            weaponDie = 12;
+            weaponDie = 10;
             goldAmount = 25;
         }
     }

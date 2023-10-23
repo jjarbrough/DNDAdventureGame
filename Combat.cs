@@ -38,6 +38,7 @@ namespace DnDAdventureGame
                     else
                     {
                         Console.WriteLine("You dodged the attack!");
+                        Thread.Sleep(2000);
                     }
                     if (!pC.isAlive)
                     {
@@ -112,6 +113,7 @@ namespace DnDAdventureGame
                     else
                     {
                         Console.WriteLine("You dodged the attack!");
+                        Thread.Sleep(2000);
                     }
                     if (!pC.isAlive)
                     {
@@ -183,6 +185,7 @@ namespace DnDAdventureGame
                     else
                     {
                         Console.WriteLine("You dodged the attack!");
+                        Thread.Sleep(2000);
                     }
                     if (!pC.isAlive)
                     {
@@ -212,13 +215,13 @@ namespace DnDAdventureGame
         //checks to see if an enemies attack hits
         public bool TryHit()
         {
-            if (pC.dexScore + Program.DieRoller(20) >= 15)
+            if (pC.dexScore + Program.DieRoller(20) > 15)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }

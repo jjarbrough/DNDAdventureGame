@@ -9,7 +9,6 @@ namespace DnDAdventureGame
 {
     public class Shop
     {
-        public static BasicCharacter character {  get; set; }
         public static List<Items> shopInventory = new List<Items>();
 
         //selection statement for if they choose a stat boost
@@ -64,7 +63,6 @@ namespace DnDAdventureGame
         //shop options and purchasing
         public Shop(BasicCharacter pC)
         {
-            character = pC;
             Items healthPotion = new HealthPotion();
             Items statBoost = new StatBoost();
             Items pack = new Pack();
@@ -78,7 +76,7 @@ namespace DnDAdventureGame
             Console.WriteLine($"The shopkeeper has the following items for sale:");
             for (int i = 0; i < shopInventory.Count(); i++)
             {
-                Console.WriteLine($"{shopInventory[i].name} for ({2 * (shopInventory[i].goldAmount - (character.chaScore * 3))})");
+                Console.WriteLine($"{shopInventory[i].name} for ({2 * (shopInventory[i].goldAmount - (pC.chaScore * 3))})");
             }
             bool finished = false;
             while (!finished)
@@ -90,10 +88,10 @@ namespace DnDAdventureGame
                     switch (input)
                     {
                         case "h":
-                        if (character.gold >= healthPotion.goldAmount)
+                        if (pC.gold >= healthPotion.goldAmount)
                         {
-                            character.AddToPack(healthPotion, pC);
-                            character.gold -= (healthPotion.goldAmount - (character.chaScore * 3) * 2);
+                            pC.AddToPack(healthPotion, pC);
+                            pC.gold -= (healthPotion.goldAmount - (pC.chaScore * 3) * 2);
                         }
                         else
                         {
@@ -101,10 +99,10 @@ namespace DnDAdventureGame
                         }
                             break;
                         case "a":
-                        if (character.gold >= statBoost.goldAmount)
+                        if (pC.gold >= statBoost.goldAmount)
                         {
                             atrributeIncrease(pC);
-                            character.gold -= (statBoost.goldAmount - (character.chaScore * 3) * 2);
+                            pC.gold -= (statBoost.goldAmount - (pC.chaScore * 3) * 2);
                             Console.WriteLine("You feel more powerful");
                         }
                         else
@@ -113,11 +111,11 @@ namespace DnDAdventureGame
                         }
                             break;
                         case "b":
-                        if (character.gold >= pack.goldAmount)
+                        if (pC.gold >= pack.goldAmount)
                         {
-                            character.gold -= (pack.goldAmount - (character.chaScore * 3) * 2);
+                            pC.gold -= (pack.goldAmount - (pC.chaScore * 3) * 2);
                             Console.WriteLine("You now have a pack to hold items you find");
-                            character.hasPack = true;
+                            pC.hasPack = true;
                         }
                         else
                         {
@@ -128,12 +126,12 @@ namespace DnDAdventureGame
                         for(int i = (pC.Inventory.Count()-1); i >= 0; i--)
                         {
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine($"Do you want to sell {pC.Inventory[i].name} for {(pC.Inventory[i].goldAmount + (3*character.chaScore))} gold? yes/no");
+                            Console.WriteLine($"Do you want to sell {pC.Inventory[i].name} for {(pC.Inventory[i].goldAmount + (3*pC.chaScore))} gold? yes/no");
                             Console.ForegroundColor = ConsoleColor.White;
                             string response = Console.ReadLine();
                             if (response == "yes")
                             {
-                                pC.gold += (pC.Inventory[i].goldAmount + (3 * character.chaScore));
+                                pC.gold += (pC.Inventory[i].goldAmount + (3 * pC.chaScore));
                                 pC.Inventory.Remove(pC.Inventory[i]);
                             }
                             else if (response == "no")

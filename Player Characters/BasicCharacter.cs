@@ -54,18 +54,6 @@ namespace DnDAdventureGame
 
         }
 
-        //Updates the weapon list
-        public virtual void GetWeaponList()
-        {
-            foreach (Items item in Inventory)
-            {
-                if (item is Weapons)
-                {
-                    weaponInventory.Add(weapon);
-                }
-            }
-        }
-
         //see what your attributes are
         public virtual void CheckAttributes()
         {

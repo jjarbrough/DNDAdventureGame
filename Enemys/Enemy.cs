@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DnDAdventureGame
 {
-    public abstract class Enemy
+    public class Enemy
     {
+        public int idEnemies { get; set; }
         public int xp { get; set; }
         public int conScore { get; set; }
-        public int armorScore {  get; set; }
         public int gold { get; set; }
         public string weaponType { get; set; }
         public string name { get; set; }

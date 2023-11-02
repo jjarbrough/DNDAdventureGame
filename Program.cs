@@ -3,6 +3,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Media;
 using System.Numerics;
 using DnDAdventureGame.Enemys;
+using System.Data;
+using System.IO;
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace DnDAdventureGame
 {
@@ -106,7 +110,7 @@ namespace DnDAdventureGame
         }
 
         //random enemy populator returns a random list of enemies
-        public static List<Enemy> EnemyPopulator()
+        public static List<Enemy> EnemyPopulator(IEnumerable<Enemy> baseEnemyList)
         {
             List<Enemy> enemyList = new List<Enemy>();
             int count = (Program.DieRoller(5) - 1);
@@ -115,22 +119,54 @@ namespace DnDAdventureGame
                 int baddy = Program.DieRoller(5);
                 if (baddy == 1)
                 {
-                    Goblin goblin = new Goblin();
-                    enemyList.Add(goblin);
+                    Enemy bear = new Enemy();
+                    foreach (Enemy baddie in baseEnemyList)
+                    {
+                        if (baddie.idEnemies == 1)
+                        {
+                            bear = baddie;
+                            bear.isAlive = true;
+                        }
+                    }
+                    enemyList.Add(bear);
                 }
                 else if (baddy == 2)
                 {
-                    Bear bear = new Bear();
-                    enemyList.Add(bear);
+                    Enemy goblin = new Enemy();
+                    foreach (Enemy baddie in baseEnemyList)
+                    {
+                        if (baddie.idEnemies == 2)
+                        {
+                            goblin = baddie;
+                            goblin.isAlive = true;
+                        }
+                    }
+                    enemyList.Add(goblin);
                 }
                 else if (baddy == 3)
                 {
-                    Kobold kobold = new Kobold();
+                    Enemy kobold = new Enemy();
+                    foreach (Enemy baddie in baseEnemyList)
+                    {
+                        if (baddie.idEnemies == 3)
+                        {
+                            kobold = baddie;
+                            kobold.isAlive = true;
+                        }
+                    }
                     enemyList.Add(kobold);
                 }
                 else if (baddy == 4)
                 {
-                    Troll troll = new Troll();
+                    Enemy troll = new Enemy();
+                    foreach (Enemy baddie in baseEnemyList)
+                    {
+                        if (baddie.idEnemies == 4)
+                        {
+                            troll = baddie;
+                            troll.isAlive = true;
+                        }
+                    }
                     enemyList.Add(troll);
                 }
             }
@@ -190,12 +226,12 @@ namespace DnDAdventureGame
         }
 
         //populating the lists
-        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter)
+        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter, List<Enemy> enemyList)
         {
             List<List<Enemy>> masterMonsterList = new List<List<Enemy>>();
             for (int i = 0; i < 1000; i++)
             {
-                List<Enemy> holder = Program.EnemyPopulator();
+                List<Enemy> holder = Program.EnemyPopulator(enemyList);
                 masterMonsterList.Add(holder);
 
             }
@@ -342,6 +378,18 @@ _#/|##########/\######(   /\   )######/\##########|\#_
         //Main running the program
         static void Main(string[] args)
         {
+
+            //The database hookup
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            string connString = config.GetConnectionString("DefaultConnection");
+            IDbConnection conn = new MySqlConnection(connString);
+            var repo = new DapperEnemyRepository(conn);
+            var badguys = repo.GetEnemies().ToList();
+
+
             List<Encounter> mainListOfEncounters = new List<Encounter>();
             Encounter currentEncounter = new Encounter();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -358,8 +406,8 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             //if (OperatingSystem.IsWindows())
             //{
                 SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
-                player.Load();
-                player.PlayLooping();
+            //    player.Load();
+            //   player.PlayLooping();
             //}
 
 
@@ -422,7 +470,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
             //making the list of encounters
 
-            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter);
+            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter, badguys);
 
             //backpack and health potion
 
@@ -449,7 +497,14 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             Thread.Sleep(5000);
             Console.WriteLine("Out pops a goblin!");
             Thread.Sleep(3000);
-            Goblin firstEnemy = new Goblin();
+            Enemy firstEnemy = new Enemy();
+            for (int i = 0; i < badguys.Count; i++)
+            {
+                if (badguys[i].idEnemies == 2)
+                {
+                    firstEnemy = badguys[i];
+                }
+            }
             List<Enemy> enemies = new List<Enemy> { firstEnemy };
             Console.WriteLine("he attacks!");
             Combat firstCombat = new Combat(mainCharacter, enemies);
@@ -480,19 +535,19 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                 {      
                     //playing the sound effects for the environments
                         player.SoundLocation = currentEncounter.soundEffects;
-                        player.Load();
-                        player.PlayLooping();
+                        //player.Load();
+                        //player.PlayLooping();
                     
                     currentEncounter.doWhat(mainCharacter, player);
-                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter));
+                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter, badguys));
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }
                 bool adventuring = false;
                 while (!adventuring)
                 {
                     player.SoundLocation = currentEncounter.soundEffects;
-                    player.Load();
-                    player.PlayLooping();
+                    //player.Load();
+                    //player.PlayLooping();
                     adventuring = currentEncounter.doTown(mainCharacter, player);
                 }
                 currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);

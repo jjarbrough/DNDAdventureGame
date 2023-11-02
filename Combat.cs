@@ -21,8 +21,8 @@ namespace DnDAdventureGame
         public void EnemyAttackFirst(SoundPlayer player)
         {
             player.SoundLocation = "Wounded (1).wav";
-            player.Load();
-            player.PlayLooping();
+            //player.Load();
+            //player.PlayLooping();
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
             {
@@ -58,12 +58,14 @@ namespace DnDAdventureGame
                         pC.xp += badGuy.xp;
                     }
                 }
+                        //sets the enemy back to alive for next time
+                        badGuy.isAlive = true;
             }
             if (pC.isAlive)
             {
                 player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
-                player.Load();
-                player.PlayLooping();
+                //player.Load();
+                //player.PlayLooping();
                 Console.WriteLine($"You won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
                 if (pC.xp >= 75)
@@ -83,8 +85,8 @@ namespace DnDAdventureGame
         public void YouAttackFirst(SoundPlayer player)
         {
             player.SoundLocation = "Wounded (1).wav";
-            player.Load();
-            player.PlayLooping();
+            //player.Load();
+            //player.PlayLooping();
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
             {
@@ -121,12 +123,14 @@ namespace DnDAdventureGame
                         break;
                     }
                 }
+                //sets the enemy back to alive for next time
+                badGuy.isAlive = true;
             }
             if (pC.isAlive)
             {
                 player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
-                player.Load();
-                player.PlayLooping();
+                //player.Load();
+                //player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
                 if (pC.xp >= 75)
@@ -145,8 +149,8 @@ namespace DnDAdventureGame
         public void YouhaveRangedWeapon(SoundPlayer player)
         {
             player.SoundLocation = "Wounded (1).wav";
-            player.Load();
-            player.PlayLooping();
+            //player.Load();
+            //player.PlayLooping();
             Console.WriteLine("You are an elf so you get a free attack");
             int num2 = pC.Attack();
             Thread.Sleep(2000);
@@ -159,9 +163,12 @@ namespace DnDAdventureGame
                 Console.WriteLine($"and {pC.intScore} gold in valuable materials (due to your intelligence)");
                 pC.gold += pC.intScore;
                 pC.xp += badGuys[0].xp;
+                //sets the enemy back to alive for next time
+                badGuys[1].isAlive = true;
             }
             int sum = 0;
             foreach (Enemy badGuy in badGuys)
+            {
                 while (pC.isAlive && badGuy.isAlive)
                 {
                     int num3 = pC.Attack();
@@ -173,14 +180,15 @@ namespace DnDAdventureGame
                         pC.gold += badGuy.gold;
                         Console.WriteLine($"You collect {badGuy.gold} gold off of the {badGuy.name}'s corpse");
                         pC.xp += badGuy.xp;
+                        badGuy.isAlive = true;
                         break;
                     }
-                    if(TryHit())
+                    if (TryHit())
                     {
-                    int num = badGuy.Attack();
-                    Thread.Sleep(2000);
-                    pC.Damage(num);
-                    sum += num;
+                        int num = badGuy.Attack();
+                        Thread.Sleep(2000);
+                        pC.Damage(num);
+                        sum += num;
                     }
                     else
                     {
@@ -193,12 +201,15 @@ namespace DnDAdventureGame
                         break;
                     }
                 }
-        
+                //sets the enemy back to alive for next time
+                badGuy.isAlive = true;
+            }
+
             if (pC.isAlive)
             {
                 player.SoundLocation = "676787__stevenmaertens__blinking-forest-acoustic.wav";
-                player.Load();
-                player.PlayLooping();
+               // player.Load();
+               // player.PlayLooping();
                 Console.WriteLine($"you won the fight but took {sum} damage (reduced by your constitution score)");
                 Console.WriteLine($"Your health is now {pC.health}");
                 if (pC.xp >= 75)

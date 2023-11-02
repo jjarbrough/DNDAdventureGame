@@ -14,7 +14,6 @@ namespace DnDAdventureGame.Enemys
             xp = 75;
             conScore = 3;
             gold = 500;
-            armorScore = 4;
             weaponType = "claws";
             name = "Dragon";
             health = 125;

@@ -1,14 +1,15 @@
 ﻿using System.Media;
 using System.Runtime.InteropServices;
 
-namespace DnDAdventureGame
+namespace DnDAdventureGame.encounters
 {
     public class Encounter
     {
+        public string name { get; set; }
         public string art { get; set; } = "";
         public string soundEffects { get; set; }
-        public bool isNoticed {  get; set; }
-        public BasicCharacter pC {  get; set; }
+        public bool isNoticed { get; set; }
+        public BasicCharacter pC { get; set; }
         public int difficultyToRun { get; set; }
         public bool isTown { get; set; }
 
@@ -24,7 +25,7 @@ namespace DnDAdventureGame
         {
 
         }
-        public Encounter (BasicCharacter playerCharacter)
+        public Encounter(BasicCharacter playerCharacter)
         {
             pC = playerCharacter;
         }
@@ -38,13 +39,16 @@ namespace DnDAdventureGame
         //the loop of options while in town
         public bool doTown(BasicCharacter character, SoundPlayer player)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"{locationDescription}");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("What do you want to do?");
             Console.WriteLine($"you have {character.gold} gold");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("press r for retire, s for shop, l for a long rest, or a to keep adventuring ");
             Console.ForegroundColor = ConsoleColor.White;
             string input = Console.ReadLine();
-            switch (input) 
+            switch (input)
             {
                 case "r":
                     Program.EndGameScreen(character, player);
@@ -77,20 +81,20 @@ namespace DnDAdventureGame
             {
                 if (art != "")
                 {
-                Console.WriteLine($"{ art }");
+                    Console.WriteLine($"{art}");
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"{locationDescription}");
                 Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(10000);
                 Console.WriteLine($"you see:");
-                if(enemies.Count == 0)
+                if (enemies.Count == 0)
                 {
                     Console.WriteLine("no enemies in your current vicinity");
 
                     Thread.Sleep(3000);
                 }
-                if (enemies.Count() >0 && !enemies[0].isAlive)
+                if (enemies.Count() > 0 && !enemies[0].isAlive)
                 {
                     Console.WriteLine("You see the following corpses strewn around");
                     foreach (Enemy badguy in enemies)
@@ -152,7 +156,7 @@ namespace DnDAdventureGame
                     correctInput = true;
                     if (pC.weaponInventory.Count > 0)
                     {
-                       // pC.GetWeaponList();
+                        // pC.GetWeaponList();
                         for (int i = pC.weaponInventory.Count() - 1; i >= 0; i--)
                         {
                             Console.WriteLine($"Would you like to equip {pC.weaponInventory[i].name}? y/n");
@@ -177,14 +181,14 @@ namespace DnDAdventureGame
                     correctInput = true;
                     if (pC.magicCharges > 0)
                     {
-                        foreach(Enemy enemy in enemies)
+                        foreach (Enemy enemy in enemies)
                         {
                             enemy.isAlive = false;
                         }
                         Console.WriteLine("You throw a fireball and kill all enemies in the area, also destroying their loot");
                         pC.magicCharges--;
                         int xpSum = 0;
-                        foreach(Enemy enemy in enemies)
+                        foreach (Enemy enemy in enemies)
                         {
                             xpSum += enemy.xp;
                         }
@@ -224,10 +228,10 @@ namespace DnDAdventureGame
             }
         }
         //if you stay and fight
-        public void Stay(BasicCharacter character, SoundPlayer player) 
+        public void Stay(BasicCharacter character, SoundPlayer player)
         {
             if (enemies.Count > 0)
-            { 
+            {
                 Combat newCombat = new Combat(pC, enemies);
                 if (isNoticed)
                 {

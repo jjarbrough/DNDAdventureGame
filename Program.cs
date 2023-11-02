@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
+using DnDAdventureGame.encounters;
 
 namespace DnDAdventureGame
 {
@@ -226,7 +227,7 @@ namespace DnDAdventureGame
         }
 
         //populating the lists
-        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter, List<Enemy> enemyList)
+        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter, List<Enemy> enemyList, List<Encounter> encounterList)
         {
             List<List<Enemy>> masterMonsterList = new List<List<Enemy>>();
             for (int i = 0; i < 1000; i++)
@@ -239,101 +240,109 @@ namespace DnDAdventureGame
             List<Enemy> dragonList = new List<Enemy>();
             dragonList.Add(dragon);
             List<Encounter> temp = new List<Encounter>();
-            Encounter cave = new Encounter()
+            Encounter cave = new Encounter();
+            foreach (Encounter encounter in encounterList) 
             {
-                soundEffects = "246230__andreangelo__squelchy-mouth-cave-hq.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 12,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Stepping into a cave, you leave behind the outside world's brightness and warmth. \nAs your eyes adjust to the dim light, the temperature drops, and you feel a cool, damp air brushing against your skin. \nThe ground beneath your feet becomes uneven, and the echo of your footsteps fills the enclosed space. \nThe scent of earth and minerals lingers in the air, and the mysterious darkness ahead beckons you to explore further.",
-                fromAfar = "A large Cave mouth looming wide",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter meadow = new Encounter()
+                if (encounter.name == "cave")
+                {
+                    cave = encounter;
+                }
+            }
+            cave.loot = ItemPopulator();
+            cave.pC = mainCharacter;
+            cave.isNoticed = isSpotted();
+            cave.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter meadow = new Encounter();
+            foreach (Encounter encounter in encounterList)
             {
-                soundEffects = "378209__felixblume__the-sounds-of-the-meadow-gran-sabana-venezuela.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 6,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Walking into a meadow, you step into a vast expanse of open space. \nSunlight bathes the area, warming your skin and brightening the surroundings. \nThe ground is covered with soft, knee-high grasses and wildflowers that sway gently in the breeze. \nThe air is filled with the scent of earth and blossoms. \nIn the distance, you might hear the chirping of birds or the buzzing of insects. \nIt's a peaceful and open landscape, inviting you to take in the natural beauty all around.",
-                fromAfar = "A welcoming meadow, dotted with flowers and small plants",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter field = new Encounter()
-            { 
-                soundEffects = "135472__kvgarlic__summeropenfielddusk.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 5,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Walking into a field, you enter a spacious landscape with ground covered by short grasses and crops.\n Sunlight bathes the area, and the surroundings are open with a distant horizon or trees in the periphery. \nThe air carries the earthy scent of vegetation, and you can hear the rustling of leaves, \nthe chirping of birds, and the gentle swaying of plants in the wind.",
-                fromAfar = "A field with rolling hills",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter forest = new Encounter()
+                if (encounter.name == "meadow")
+                {
+                    meadow = encounter;
+                }
+            }
+            meadow.loot = ItemPopulator();
+            meadow.pC = mainCharacter;
+            meadow.isNoticed = isSpotted();
+            meadow.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter field = new Encounter();
+            foreach (Encounter encounter in encounterList)
             {
-                soundEffects = "531724__klankbeeld__forest-summer-roond-021-200619_0186.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 10,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Walking into a forest, you step into a dense and verdant environment. \nThe ground is covered with fallen leaves, twigs, and soft soil. \nTall trees rise around you, their branches forming a natural canopy overhead, dimming the light. \nThe air is cool, and the scent of earth and moss surrounds you. \nThe forest is alive with the chirping of birds, rustling of small animals, and the occasional crackling of branches. \nIt's a serene and mysterious realm, inviting you to explore its depths.",
-                fromAfar = "A Dense and gloomy forest",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter town = new Encounter()
+                if (encounter.name == "field")
+                {
+                    field = encounter;
+                }
+            }
+            field.loot = ItemPopulator();
+            field.pC = mainCharacter;
+            field.isNoticed = isSpotted();
+            field.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter forest = new Encounter();
+            foreach (Encounter encounter in encounterList)
             {
-                soundEffects = "423119__ogsoundfx__medieval-city-sample.wav",
-                difficultyToRun = 12,
-                pC = mainCharacter,
-                isNoticed = false,
-                isTown = true,
-                locationDescription = "Walking into town narrow cobblestone streets wind between centuries-old stone buildings. \nOverhanging timber-framed houses line the lanes, and the air is filled with the scent of opportunity. \nThe town bustles with activity as villagers go about their daily routines. \nYou hear the clip-clop of horses' hooves, merchants haggling at market stalls, and the distant chime of a church bell.",
-                fromAfar = "A town peeking over the hills in the distance",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter bog = new Encounter()
-            {   
-                soundEffects = "399744__inspectorj__ambience-florida-frogs-gathering-a.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 15,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "As you step into the bog, the ground beneath your feet gives way, sinking into a squelchy, muddy morass. \nThe air is thick with a damp, earthy aroma, and the dense fog conceals much of the landscape. \nWaterlogged plants with twisted, moss-covered branches reach out from the murky waters, and the eerie chorus of croaking frogs and buzzing insects fills the air. \nYour every step is accompanied by a sucking sound as your boots struggle to break free from the mire, \nmaking each movement a slow and cautious endeavor in this eerie, desolate wetland.",
-                fromAfar = "What appears to be wetlands covered in fog",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter mountain = new Encounter()
+                if (encounter.name == "forest")
+                {
+                    forest = encounter;
+                }
+            }
+            forest.loot = ItemPopulator();
+            forest.pC = mainCharacter;
+            forest.isNoticed = isSpotted();
+            forest.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter town = new Encounter();
+            foreach (Encounter encounter in encounterList)
             {
-                soundEffects = "543449__kostas17__howling-wind.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 6,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Walking up to a mountain is a gradual journey of ascending terrain. \nAs you approach the mountain, the landscape becomes steeper, and the air grows crisper. \nThe path typically leads through forests, meadows, or rocky trails, with each step offering a closer view of the majestic peak ahead. \nThe mountain looms larger and more imposing as you get nearer, and the anticipation of the climb ahead intensifies with each stride.",
-                fromAfar = "majestic mountain peaks disappearing into the clouds",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
-            Encounter river = new Encounter()
+                if (encounter.name == "town")
+                {
+                    town = encounter;
+                }
+            }
+            town.pC = mainCharacter;
+            town.isNoticed = false;
+            town.enemies = GetRandomEnemies(masterMonsterList);
+            
+
+            Encounter bog = new Encounter();
+            foreach (Encounter encounter in encounterList)
             {
-                soundEffects = "584595__tosha73__mountain-river.wav",
-                loot = ItemPopulator(),
-                difficultyToRun = 6,
-                pC = mainCharacter,
-                isNoticed = isSpotted(),
-                isTown = false,
-                locationDescription = "Approaching a river, you see the glistening water ahead. \nThe gentle sound of flowing water fills the air, and the earthy scent of the surrounding nature surrounds you. \nYou walk toward the riverbank, feeling the cool breeze and the soft, uneven ground underfoot. \nThe lush greenery and wildlife along the river's edge add to the tranquil atmosphere, making it a serene and inviting spot.",
-                fromAfar = "A river winding its way in the distance",
-                enemies = GetRandomEnemies(masterMonsterList)
-            };
+                if (encounter.name == "bog")
+                {
+                    bog = encounter;
+                }
+            }
+            bog.loot = ItemPopulator();
+            bog.pC = mainCharacter;
+            bog.isNoticed = isSpotted();
+            bog.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter mountain = new Encounter();
+            foreach (Encounter encounter in encounterList)
+            {
+                if (encounter.name == "mountain")
+                {
+                    mountain = encounter;
+                }
+            }
+            mountain.loot = ItemPopulator();
+            mountain.pC = mainCharacter;
+            mountain.isNoticed = isSpotted();
+            mountain.enemies = GetRandomEnemies(masterMonsterList);
+
+            Encounter river = new Encounter();
+            foreach (Encounter encounter in encounterList)
+            {
+                if (encounter.name == "river")
+                {
+                    river = encounter;
+                }
+            }
+            river.loot = ItemPopulator();
+            river.pC = mainCharacter;
+            river.isNoticed = isSpotted();
+            river.enemies = GetRandomEnemies(masterMonsterList);
             Encounter volcano = new Encounter()
             {
                 art = @"
@@ -386,8 +395,14 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                 .Build();
             string connString = config.GetConnectionString("DefaultConnection");
             IDbConnection conn = new MySqlConnection(connString);
-            var repo = new DapperEnemyRepository(conn);
-            var badguys = repo.GetEnemies().ToList();
+            var enemyRepo = new DapperEnemyRepository(conn);
+            var badguys = enemyRepo.GetEnemies().ToList();
+            var encounterRepo = new DapperEncounterRepository(conn);
+            var encounters = encounterRepo.GetEncounters().ToList();
+            foreach(Encounter encounter in encounters)
+            {
+                Console.WriteLine($"{encounter.name} | {encounter.fromAfar}");
+            }
 
 
             List<Encounter> mainListOfEncounters = new List<Encounter>();
@@ -470,7 +485,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
             //making the list of encounters
 
-            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter, badguys);
+            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter, badguys, encounters);
 
             //backpack and health potion
 
@@ -539,7 +554,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                         //player.PlayLooping();
                     
                     currentEncounter.doWhat(mainCharacter, player);
-                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter, badguys));
+                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter, badguys, encounters));
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }
                 bool adventuring = false;

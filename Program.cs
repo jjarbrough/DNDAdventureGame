@@ -8,6 +8,7 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using DnDAdventureGame.encounters;
+using Dapper;
 
 namespace DnDAdventureGame
 {
@@ -111,66 +112,18 @@ namespace DnDAdventureGame
         }
 
         //random enemy populator returns a random list of enemies
-        public static List<Enemy> EnemyPopulator(IEnumerable<Enemy> baseEnemyList)
+        public static List<Enemy> EnemyPopulator(IDbConnection conn)
         {
+            var enemyRepo = new DapperEnemyRepository(conn);
             List<Enemy> enemyList = new List<Enemy>();
             int count = (Program.DieRoller(5) - 1);
             for (int i = 0; i < count; i++)
             {
-                int baddy = Program.DieRoller(5);
-                if (baddy == 1)
-                {
-                    Enemy bear = new Enemy();
-                    foreach (Enemy baddie in baseEnemyList)
-                    {
-                        if (baddie.idEnemies == 1)
-                        {
-                            bear = baddie;
-                            bear.isAlive = true;
-                        }
-                    }
-                    enemyList.Add(bear);
-                }
-                else if (baddy == 2)
-                {
-                    Enemy goblin = new Enemy();
-                    foreach (Enemy baddie in baseEnemyList)
-                    {
-                        if (baddie.idEnemies == 2)
-                        {
-                            goblin = baddie;
-                            goblin.isAlive = true;
-                        }
-                    }
-                    enemyList.Add(goblin);
-                }
-                else if (baddy == 3)
-                {
-                    Enemy kobold = new Enemy();
-                    foreach (Enemy baddie in baseEnemyList)
-                    {
-                        if (baddie.idEnemies == 3)
-                        {
-                            kobold = baddie;
-                            kobold.isAlive = true;
-                        }
-                    }
-                    enemyList.Add(kobold);
-                }
-                else if (baddy == 4)
-                {
-                    Enemy troll = new Enemy();
-                    foreach (Enemy baddie in baseEnemyList)
-                    {
-                        if (baddie.idEnemies == 4)
-                        {
-                            troll = baddie;
-                            troll.isAlive = true;
-                        }
-                    }
-                    enemyList.Add(troll);
-                }
-            }
+                Enemy enemy = new Enemy();
+                int baddy = Program.DieRoller(conn.QuerySingle<int>("SELECT COUNT(name) FROM enemy"));
+                enemy = enemyRepo.GetEnemy(baddy);
+                enemyList.Add(enemy);
+            }   
             return enemyList;
         }
 
@@ -227,12 +180,12 @@ namespace DnDAdventureGame
         }
 
         //populating the lists
-        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter, List<Enemy> enemyList, List<Encounter> encounterList)
+        public static List<Encounter> makeEnvironmentsAndPopulate(BasicCharacter mainCharacter, IDbConnection conn, List<Encounter> encounterList)
         {
             List<List<Enemy>> masterMonsterList = new List<List<Enemy>>();
             for (int i = 0; i < 1000; i++)
             {
-                List<Enemy> holder = Program.EnemyPopulator(enemyList);
+                List<Enemy> holder = Program.EnemyPopulator(conn);
                 masterMonsterList.Add(holder);
 
             }
@@ -396,13 +349,8 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             string connString = config.GetConnectionString("DefaultConnection");
             IDbConnection conn = new MySqlConnection(connString);
             var enemyRepo = new DapperEnemyRepository(conn);
-            var badguys = enemyRepo.GetEnemies().ToList();
             var encounterRepo = new DapperEncounterRepository(conn);
             var encounters = encounterRepo.GetEncounters().ToList();
-            foreach(Encounter encounter in encounters)
-            {
-                Console.WriteLine($"{encounter.name} | {encounter.fromAfar}");
-            }
 
 
             List<Encounter> mainListOfEncounters = new List<Encounter>();
@@ -421,8 +369,8 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             //if (OperatingSystem.IsWindows())
             //{
                 SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
-            //    player.Load();
-            //   player.PlayLooping();
+                player.Load();
+                player.PlayLooping();
             //}
 
 
@@ -485,7 +433,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
 
             //making the list of encounters
 
-            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter, badguys, encounters);
+            mainListOfEncounters = makeEnvironmentsAndPopulate(mainCharacter, conn, encounters);
 
             //backpack and health potion
 
@@ -512,14 +460,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             Thread.Sleep(5000);
             Console.WriteLine("Out pops a goblin!");
             Thread.Sleep(3000);
-            Enemy firstEnemy = new Enemy();
-            for (int i = 0; i < badguys.Count; i++)
-            {
-                if (badguys[i].idEnemies == 2)
-                {
-                    firstEnemy = badguys[i];
-                }
-            }
+            Enemy firstEnemy = enemyRepo.GetEnemy(2);
             List<Enemy> enemies = new List<Enemy> { firstEnemy };
             Console.WriteLine("he attacks!");
             Combat firstCombat = new Combat(mainCharacter, enemies);
@@ -550,19 +491,19 @@ _#/|##########/\######(   /\   )######/\##########|\#_
                 {      
                     //playing the sound effects for the environments
                         player.SoundLocation = currentEncounter.soundEffects;
-                        //player.Load();
-                        //player.PlayLooping();
+                        player.Load();
+                        player.PlayLooping();
                     
                     currentEncounter.doWhat(mainCharacter, player);
-                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter, badguys, encounters));
+                    List<Encounter> possibleEnvironments = GetRandomEncounters(makeEnvironmentsAndPopulate(mainCharacter, conn, encounters));
                     currentEncounter = Encounter.ChooseDirection(possibleEnvironments);
                 }
                 bool adventuring = false;
                 while (!adventuring)
                 {
                     player.SoundLocation = currentEncounter.soundEffects;
-                    //player.Load();
-                    //player.PlayLooping();
+                    player.Load();
+                    player.PlayLooping();
                     adventuring = currentEncounter.doTown(mainCharacter, player);
                 }
                 currentEncounter = Encounter.ChooseDirection(mainListOfEncounters);

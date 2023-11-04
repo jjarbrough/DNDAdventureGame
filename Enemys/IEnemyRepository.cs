@@ -9,5 +9,6 @@ namespace DnDAdventureGame
     internal interface IEnemyRepository
     {
         public IEnumerable<Enemy> GetEnemies();
+        public Enemy GetEnemy(int id);
     }
 }

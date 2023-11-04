@@ -20,5 +20,10 @@ namespace DnDAdventureGame.Enemys
         {
             return _connection.Query<Enemy>("SELECT * FROM enemy;");
         }
+
+        public Enemy GetEnemy(int id)
+        {
+            return _connection.QuerySingle<Enemy>("SELECT * FROM enemy WHERE idEnemies = @id", new { id });
+        }
     }
 }

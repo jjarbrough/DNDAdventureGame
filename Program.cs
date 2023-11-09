@@ -121,7 +121,10 @@ namespace DnDAdventureGame
             {
                 Enemy enemy = new Enemy();
                 int baddy = Program.DieRoller(conn.QuerySingle<int>("SELECT COUNT(name) FROM enemy"));
-                enemy = enemyRepo.GetEnemy(baddy);
+                var listOfNames = conn.Query<string>("SELECT name FROM enemy;").ToList();
+                var enemyName = listOfNames[baddy - 1];
+                string name = enemyName.ToString();
+                enemy = enemyRepo.GetEnemy(name);
                 enemyList.Add(enemy);
             }   
             return enemyList;
@@ -366,12 +369,10 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             Console.ForegroundColor = ConsoleColor.White;
 
             //plays background music
-            //if (OperatingSystem.IsWindows())
-            //{
+            
                 SoundPlayer player = new SoundPlayer("676787__stevenmaertens__blinking-forest-acoustic.wav");
                 player.Load();
                 player.PlayLooping();
-            //}
 
 
             Console.WriteLine("In this game you will adventure through the wilderness collecting gold.");
@@ -460,7 +461,7 @@ _#/|##########/\######(   /\   )######/\##########|\#_
             Thread.Sleep(5000);
             Console.WriteLine("Out pops a goblin!");
             Thread.Sleep(3000);
-            Enemy firstEnemy = enemyRepo.GetEnemy(2);
+            Enemy firstEnemy = enemyRepo.GetEnemy("Goblin");
             List<Enemy> enemies = new List<Enemy> { firstEnemy };
             Console.WriteLine("he attacks!");
             Combat firstCombat = new Combat(mainCharacter, enemies);

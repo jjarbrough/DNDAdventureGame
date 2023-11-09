@@ -21,9 +21,9 @@ namespace DnDAdventureGame.Enemys
             return _connection.Query<Enemy>("SELECT * FROM enemy;");
         }
 
-        public Enemy GetEnemy(int id)
+        public Enemy GetEnemy(string name)
         {
-            return _connection.QuerySingle<Enemy>("SELECT * FROM enemy WHERE idEnemies = @id", new { id });
+            return _connection.QuerySingle<Enemy>("SELECT * FROM enemy WHERE name = @name", new { name });
         }
     }
 }
